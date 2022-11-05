@@ -306,13 +306,16 @@ namespace Terraria.ModLoader.Setup
 		{
 			return new WorkItem("Extracting: " + name, () =>
 			{
-				var path = Path.Combine(srcDir, projectDir, name);
+				string path = Path.Combine(srcDir, projectDir, name);
+
 				CreateParentDirectory(path);
 
 				var s = res.TryOpenStream();
 				s.Position = 0;
-				using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
-					s.CopyTo(fs);
+
+				using var fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+
+				s.CopyTo(fs);
 			});
 		}
 
@@ -331,29 +334,29 @@ namespace Terraria.ModLoader.Setup
 		{
 			return new WorkItem("Decompiling: " + src.Key, updateStatus =>
 			{
-				var path = Path.Combine(srcDir, projectName, src.Key);
+				string path = Path.Combine(srcDir, projectName, src.Key);
+
 				CreateParentDirectory(path);
 
-				using (var w = new StringWriter())
-				{
-					if (conditional != null)
-						w.WriteLine("#if "+conditional);
+				using var w = new StringWriter();
 
-					CreateDecompiler(ts)
-						.DecompileTypes(src.ToArray())
-						.AcceptVisitor(new CSharpOutputVisitor(w, projectDecompiler.Settings.CSharpFormattingOptions));
+				if (conditional != null)
+					w.WriteLine("#if " + conditional);
 
-					if (conditional != null)
-						w.WriteLine("#endif");
+				CreateDecompiler(ts)
+					.DecompileTypes(src.ToArray())
+					.AcceptVisitor(new CSharpOutputVisitor(w, projectDecompiler.Settings.CSharpFormattingOptions));
 
-					string source = w.ToString();
-					if (formatOutput) {
-						updateStatus("Formatting: " + src.Key);
-						source = FormatTask.Format(source, taskInterface.CancellationToken, true);
-					}
+				if (conditional != null)
+					w.WriteLine("#endif");
 
-					File.WriteAllText(path, source);
+				string source = w.ToString();
+				if (formatOutput) {
+					updateStatus("Formatting: " + src.Key);
+					source = FormatTask.Format(source, taskInterface.CancellationToken, true);
 				}
+
+				File.WriteAllText(path, source);
 			});
 		}
 
@@ -369,123 +372,143 @@ namespace Terraria.ModLoader.Setup
 
 				// references
 				w.WriteStartElement("ItemGroup");
-				foreach (var r in module.AssemblyReferences.OrderBy(r => r.Name)) {
-					if (r.Name == "mscorlib") continue;
 
-					if (decompiledLibraries?.Contains(r.Name) ?? false) {
-						w.WriteStartElement("ProjectReference");
-						w.WriteAttributeString("Include", $"../{r.Name}/{r.Name}.csproj");
-						w.WriteEndElement();
+				var references = module.AssemblyReferences.Where(r => r.Name != "mscorlib").OrderBy(r => r.Name).ToArray();
+				var projectReferences = decompiledLibraries != null
+					? references.Where(r => decompiledLibraries.Contains(r.Name)).ToArray()
+					: Array.Empty<ICSharpCode.Decompiler.Metadata.AssemblyReference>();
+				var normalReferences = references.Except(projectReferences).ToArray();
 
-						w.WriteStartElement("EmbeddedResource");
-						w.WriteAttributeString("Include", $"../{r.Name}/bin/$(Configuration)/$(TargetFramework)/{r.Name}.dll");
-						w.WriteElementString("LogicalName", $"Terraria.Libraries.{r.Name}.{r.Name}.dll");
-					}
-					else {
-						w.WriteStartElement("Reference");
-						w.WriteAttributeString("Include", r.Name);
-					}
+				foreach (var r in projectReferences) {
+					w.WriteStartElement("ProjectReference");
+					w.WriteAttributeString("Include", $"../{r.Name}/{r.Name}.csproj");
 					w.WriteEndElement();
 				}
-				w.WriteEndElement(); // </ItemGroup>
 
+				foreach (var r in projectReferences) {
+					w.WriteStartElement("EmbeddedResource");
+					w.WriteAttributeString("Include", $"../{r.Name}/bin/$(Configuration)/$(TargetFramework)/{r.Name}.dll");
+					w.WriteAttributeString("LogicalName", $"Terraria.Libraries.{r.Name}.{r.Name}.dll");
+					w.WriteEndElement();
+				}
+
+				foreach (var r in normalReferences) {
+					w.WriteStartElement("Reference");
+					w.WriteAttributeString("Include", r.Name);
+					w.WriteEndElement();
+				}
+
+				w.WriteEndElement(); // </ItemGroup>
 			});
 		}
 
 		private WorkItem WriteProjectFile(PEFile module, string outputType, IEnumerable<string> sources, IEnumerable<string> resources, Action<XmlTextWriter> writeSpecificConfig)
 		{
-			var name = GetAssemblyTitle(module);
-			var filename = name + ".csproj";
+			string name = GetAssemblyTitle(module);
+			string filename = name + ".csproj";
+
 			return new WorkItem("Writing: " + filename, () =>
 			{
-				var path = Path.Combine(srcDir, name, filename);
+				string path = Path.Combine(srcDir, name, filename);
+
 				CreateParentDirectory(path);
 
-				using (var sw = new StreamWriter(path))
-				using (var w = new XmlTextWriter(sw)) {
-					w.Formatting = System.Xml.Formatting.Indented;
-					w.WriteStartElement("Project");
-					w.WriteAttributeString("Sdk", "Microsoft.NET.Sdk");
+				using var sw = new StreamWriter(path);
+				using var w = CreateXmlWriter(sw);
 
-					w.WriteStartElement("Import");
-					w.WriteAttributeString("Project", "../Configuration.targets");
-					w.WriteEndElement(); // </Import>
+				w.WriteStartElement("Project");
+				w.WriteAttributeString("Sdk", "Microsoft.NET.Sdk");
 
-					w.WriteStartElement("PropertyGroup");
-					w.WriteElementString("OutputType", outputType);
-					w.WriteElementString("Version", new AssemblyName(module.FullName).Version.ToString());
-					
-					var attribs = GetCustomAttributes(module);
-					w.WriteElementString("Company", attribs[nameof(AssemblyCompanyAttribute)]);
-					w.WriteElementString("Copyright", attribs[nameof(AssemblyCopyrightAttribute)]);
+				w.WriteStartElement("Import");
+				w.WriteAttributeString("Project", "../Configuration.targets");
+				w.WriteEndElement(); // </Import>
 
-					w.WriteElementString("RootNamespace", module.Name);
-					w.WriteEndElement(); // </PropertyGroup>
+				w.WriteStartElement("PropertyGroup");
+				w.WriteElementString("OutputType", outputType);
+				w.WriteElementString("Version", new AssemblyName(module.FullName).Version.ToString());
 
-					writeSpecificConfig(w);
-					
-					// resources
-					w.WriteStartElement("ItemGroup");
-					foreach (var r in ApplyWildcards(resources, sources.ToArray()).OrderBy(r => r)) {
-						w.WriteStartElement("EmbeddedResource");
-						w.WriteAttributeString("Include", r);
-						w.WriteEndElement();
-					}
-					w.WriteEndElement(); // </ItemGroup>
-					w.WriteEndElement(); // </Project>
+				var attribs = GetCustomAttributes(module);
+				w.WriteElementString("Company", attribs[nameof(AssemblyCompanyAttribute)]);
+				w.WriteElementString("Copyright", attribs[nameof(AssemblyCopyrightAttribute)]);
 
-					sw.Write(Environment.NewLine);
+				w.WriteElementString("RootNamespace", module.Name);
+				w.WriteEndElement(); // </PropertyGroup>
+
+				writeSpecificConfig(w);
+
+				// resources
+				w.WriteStartElement("ItemGroup");
+
+				foreach (string r in ApplyWildcards(resources, sources.ToArray()).OrderBy(r => r)) {
+					w.WriteStartElement("EmbeddedResource");
+					w.WriteAttributeString("Include", r);
+					w.WriteEndElement();
 				}
+
+				w.WriteEndElement(); // </ItemGroup>
+				w.WriteEndElement(); // </Project>
+
+				sw.Write(Environment.NewLine);
 			});
 		}
 
 		private WorkItem WriteCommonConfigurationFile()
 		{
-			var filename = "Configuration.targets";
+			string filename = "Configuration.targets";
+
 			return new WorkItem("Writing: " + filename, () => {
-				var path = Path.Combine(srcDir, filename);
+				string path = Path.Combine(srcDir, filename);
+
 				CreateParentDirectory(path);
 
-				using (var sw = new StreamWriter(path))
-				using (var w = new XmlTextWriter(sw)) {
-					w.Formatting = System.Xml.Formatting.Indented;
-					w.WriteStartElement("Project");
+				using var sw = new StreamWriter(path);
+				using var w = CreateXmlWriter(sw);
 
-					w.WriteStartElement("PropertyGroup");
-					w.WriteElementString("TargetFramework", "net40");
-					w.WriteElementString("Configurations", "Debug;Release;ServerDebug;ServerRelease");
-					w.WriteElementString("AssemblySearchPaths", "$(AssemblySearchPaths);{GAC}");
-					w.WriteElementString("PlatformTarget", "x86");
-					w.WriteElementString("AllowUnsafeBlocks", "true");
-					w.WriteElementString("Optimize", "true");
-					w.WriteEndElement(); // </PropertyGroup>
+				w.WriteStartElement("Project");
 
-					//configurations
-					w.WriteStartElement("PropertyGroup");
-					w.WriteAttributeString("Condition", "$(Configuration.Contains('Server'))");
-					w.WriteElementString("DefineConstants", "$(DefineConstants);SERVER");
-					w.WriteEndElement(); // </PropertyGroup>
+				w.WriteStartElement("PropertyGroup");
+				w.WriteElementString("TargetFramework", "net40");
+				w.WriteElementString("Configurations", "Debug;Release;ServerDebug;ServerRelease");
+				w.WriteElementString("AssemblySearchPaths", "$(AssemblySearchPaths);{GAC}");
+				w.WriteElementString("PlatformTarget", "x86");
+				w.WriteElementString("AllowUnsafeBlocks", "true");
+				w.WriteElementString("Optimize", "true");
+				w.WriteEndElement(); // </PropertyGroup>
 
-					w.WriteStartElement("PropertyGroup");
-					w.WriteAttributeString("Condition", "!$(Configuration.Contains('Server'))");
-					w.WriteElementString("DefineConstants", "$(DefineConstants);CLIENT");
-					w.WriteEndElement(); // </PropertyGroup>
+				//configurations
+				w.WriteStartElement("PropertyGroup");
+				w.WriteAttributeString("Condition", "$(Configuration.Contains('Server'))");
+				w.WriteElementString("DefineConstants", "$(DefineConstants);SERVER");
+				w.WriteEndElement(); // </PropertyGroup>
 
-					w.WriteStartElement("PropertyGroup");
-					w.WriteAttributeString("Condition", "$(Configuration.Contains('Debug'))");
-					w.WriteElementString("Optimize", "false");
-					w.WriteElementString("DefineConstants", "$(DefineConstants);DEBUG");
-					w.WriteEndElement(); // </PropertyGroup>
+				w.WriteStartElement("PropertyGroup");
+				w.WriteAttributeString("Condition", "!$(Configuration.Contains('Server'))");
+				w.WriteElementString("DefineConstants", "$(DefineConstants);CLIENT");
+				w.WriteEndElement(); // </PropertyGroup>
 
-					w.WriteEndElement(); // </Project>
+				w.WriteStartElement("PropertyGroup");
+				w.WriteAttributeString("Condition", "$(Configuration.Contains('Debug'))");
+				w.WriteElementString("Optimize", "false");
+				w.WriteElementString("DefineConstants", "$(DefineConstants);DEBUG");
+				w.WriteEndElement(); // </PropertyGroup>
 
-					sw.Write(Environment.NewLine);
-				}
+				w.WriteEndElement(); // </Project>
+
+				sw.Write(Environment.NewLine);
 			});
 		}
 
-		private IEnumerable<string> ApplyWildcards(IEnumerable<string> include, IReadOnlyList<string> exclude) {
+		private static XmlTextWriter CreateXmlWriter(StreamWriter streamWriter) {
+			return new XmlTextWriter(streamWriter) {
+				Formatting = System.Xml.Formatting.Indented,
+				IndentChar = '\t',
+				Indentation = 1,
+			};
+		}
+
+		private static IEnumerable<string> ApplyWildcards(IEnumerable<string> include, IReadOnlyList<string> exclude) {
 			var wildpaths = new HashSet<string>();
+
 			foreach (var path in include) {
 				if (wildpaths.Any(path.StartsWith))
 					continue;
