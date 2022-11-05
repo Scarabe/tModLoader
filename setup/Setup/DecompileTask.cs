@@ -87,7 +87,7 @@ namespace Terraria.ModLoader.Setup
 
 		private ExtendedProjectDecompiler projectDecompiler;
 
-		private readonly DecompilerSettings decompilerSettings = new DecompilerSettings(LanguageVersion.Latest)
+		private readonly DecompilerSettings decompilerSettings = new(LanguageVersion.Latest)
 		{
 			RemoveDeadCode = true,
 			CSharpFormattingOptions = FormattingOptionsFactory.CreateKRStyle()
