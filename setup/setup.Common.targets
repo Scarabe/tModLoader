@@ -22,6 +22,7 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.3.1" />
 		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.3.1" />
 		<!-- Preview is needed for https://github.com/icsharpcode/ILSpy/commit/8dd721a -->
+		<!-- When updating, please remove the TODO patch from patches/Terraria/Terraria/Graphics/TileBatch.cs.patch, and this line. -->
 		<PackageReference Include="ICSharpCode.Decompiler" Version="8.0.0.7106-preview2" />
 	</ItemGroup>
 

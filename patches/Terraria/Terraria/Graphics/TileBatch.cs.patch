@@ -15,10 +15,11 @@
  public class TileBatch
  {
  	private struct SpriteData
-@@ -313,8 +_,17 @@
+@@ -313,8 +_,18 @@
  				}
  			}
  
++			//TODO:
 +			// Decompilation bug, update decompiler when
 +			// https://github.com/icsharpcode/ILSpy/commit/b87f375
 +			// Is pushed in a release/preview.
