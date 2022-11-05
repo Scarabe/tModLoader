@@ -122,7 +122,7 @@ namespace Terraria.ModLoader.Setup
 			var serverModule = ReadModule(TerrariaServerPath, serverVersion);
 			var mainModule = serverOnly ? serverModule : clientModule;
 
-			var embeddedAssemblyResolver = new EmbeddedAssemblyResolver(mainModule, mainModule.Reader.DetectTargetFrameworkId());
+			var embeddedAssemblyResolver = new EmbeddedAssemblyResolver(mainModule, mainModule.DetectTargetFrameworkId());
 
 			projectDecompiler = new ExtendedProjectDecompiler(decompilerSettings, embeddedAssemblyResolver);
 

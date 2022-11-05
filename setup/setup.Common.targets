@@ -21,7 +21,8 @@
 		<PackageReference Include="MonoMod.RuntimeDetour.HookGen" Version="22.5.1.1" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.3.1" />
 		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.3.1" />
-		<PackageReference Include="ICSharpCode.Decompiler" Version="7.2.1.6856" />
+		<!-- Preview is needed for https://github.com/icsharpcode/ILSpy/commit/8dd721a -->
+		<PackageReference Include="ICSharpCode.Decompiler" Version="8.0.0.7106-preview2" />
 	</ItemGroup>
 
 	<!-- Library references -->

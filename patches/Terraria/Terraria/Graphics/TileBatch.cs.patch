@@ -1,7 +1,8 @@
 --- src/decompiled/Terraria/Graphics/TileBatch.cs
 +++ src/Terraria/Terraria/Graphics/TileBatch.cs
-@@ -1,9 +_,13 @@
+@@ -1,10 +_,14 @@
  using System;
+ using System.Runtime.CompilerServices;
 +#if FNA
 +using System.Collections.Generic;
 +#endif
@@ -14,7 +15,7 @@
  public class TileBatch
  {
  	private struct SpriteData
-@@ -324,4 +_,356 @@
+@@ -325,4 +_,356 @@
  			count -= num3;
  		}
  	}
