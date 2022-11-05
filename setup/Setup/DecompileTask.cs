@@ -8,10 +8,12 @@ using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.OutputVisitor;
+using ICSharpCode.Decompiler.CSharp.ProjectDecompiler;
 using ICSharpCode.Decompiler.CSharp.Transforms;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
@@ -31,7 +33,7 @@ namespace Terraria.ModLoader.Setup
 			public EmbeddedAssemblyResolver(PEFile baseModule, string targetFramework)
 			{
 				this.baseModule = baseModule;
-				_resolver = new UniversalAssemblyResolver(baseModule.FileName, true, targetFramework, PEStreamOptions.PrefetchMetadata);
+				_resolver = new UniversalAssemblyResolver(baseModule.FileName, true, targetFramework, streamOptions: PEStreamOptions.PrefetchMetadata);
 				_resolver.AddSearchDirectory(Path.GetDirectoryName(baseModule.FileName));
 			}
 
@@ -43,25 +45,37 @@ namespace Terraria.ModLoader.Setup
 						return module;
 					
 					//look in the base module's embedded resources
-					var resName = name.Name + ".dll";
+					string resName = name.Name + ".dll";
 					var res = baseModule.Resources.Where(r => r.ResourceType == ResourceType.Embedded).SingleOrDefault(r => r.Name.EndsWith(resName));
-					if (!res.IsNil)
+
+					if (res != null)
 						module = new PEFile(res.Name, res.TryOpenStream());
 
-					if (module == null)
-						module = _resolver.Resolve(name);
+					module ??= _resolver.Resolve(name);
 					
 					cache[name.FullName] = module;
 					return module;
 				}
 			}
 
-			public PEFile ResolveModule(PEFile mainModule, string moduleName) => _resolver.ResolveModule(mainModule, moduleName);
+			public PEFile ResolveModule(PEFile mainModule, string moduleName)
+				=> _resolver.ResolveModule(mainModule, moduleName);
+
+			public async Task<PEFile> ResolveAsync(IAssemblyReference reference)
+				=> await Task.Run(() => Resolve(reference));
+
+			public async Task<PEFile> ResolveModuleAsync(PEFile mainModule, string moduleName)
+				=> await Task.Run(() => ResolveModule(mainModule, moduleName));
 		}
 
+		// What function does this serve..?
 		private class ExtendedProjectDecompiler : WholeProjectDecompiler
 		{
-			public new bool IncludeTypeWhenDecompilingProject(PEFile module, TypeDefinitionHandle type) => base.IncludeTypeWhenDecompilingProject(module, type);
+			public ExtendedProjectDecompiler(DecompilerSettings settings, IAssemblyResolver assemblyResolver)
+				: base(settings, assemblyResolver, assemblyReferenceClassifier: null, debugInfoProvider: null) { }
+
+			public new bool IncludeTypeWhenDecompilingProject(PEFile module, TypeDefinitionHandle type)
+				=> base.IncludeTypeWhenDecompilingProject(module, type);
 		}
 
 		public static readonly Version clientVersion = new("1.4.4.7");
@@ -108,11 +122,9 @@ namespace Terraria.ModLoader.Setup
 			var serverModule = ReadModule(TerrariaServerPath, serverVersion);
 			var mainModule = serverOnly ? serverModule : clientModule;
 
-			projectDecompiler = new ExtendedProjectDecompiler { 
-				Settings = decompilerSettings,
-				AssemblyResolver = new EmbeddedAssemblyResolver(mainModule, mainModule.Reader.DetectTargetFrameworkId())
-			};
+			var embeddedAssemblyResolver = new EmbeddedAssemblyResolver(mainModule, mainModule.Reader.DetectTargetFrameworkId());
 
+			projectDecompiler = new ExtendedProjectDecompiler(decompilerSettings, embeddedAssemblyResolver);
 
 			var items = new List<WorkItem>();
 			var files = new HashSet<string>();
@@ -120,7 +132,8 @@ namespace Terraria.ModLoader.Setup
 			var exclude = new List<string>();
 
 			// Decompile embedded library sources directly into Terraria project. Treated the same as Terraria source
-			var decompiledLibraries = new [] { "ReLogic" };
+			string[] decompiledLibraries = new [] { "ReLogic" };
+
 			foreach (var lib in decompiledLibraries) {
 				var libRes = mainModule.Resources.Single(r => r.Name.EndsWith(lib+".dll"));
 				AddEmbeddedLibrary(libRes, projectDecompiler.AssemblyResolver, items);

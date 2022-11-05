@@ -21,11 +21,12 @@
 		<PackageReference Include="MonoMod.RuntimeDetour.HookGen" Version="22.5.1.1" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.4.0" />
 		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.4.0" />
+		<PackageReference Include="ICSharpCode.Decompiler" Version="7.2.1.6856" />
 	</ItemGroup>
 
 	<!-- Library references -->
 	<ItemGroup>
-		<Reference Include="ICSharpCode.Decompiler" HintPath="lib\ICSharpCode.Decompiler.dll" />
+		<!-- Nothing! -->
 	</ItemGroup>
 
 	<!-- PatchReviewer exclusion -->
