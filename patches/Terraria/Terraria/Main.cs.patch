@@ -1,15 +1,14 @@
 --- src/decompiled/Terraria/Main.cs
 +++ src/Terraria/Terraria/Main.cs
-@@ -74,7 +_,20 @@
+@@ -74,7 +_,19 @@
  
  namespace Terraria;
  
 +#if !WINDOWS
 +private class Control
 +{
-+	internal static Form FromHandle(IntPtr handle) {
-+		throw new NotImplementedException();
-+	}
++	internal static Form FromHandle(IntPtr handle)
++		=> throw new NotImplementedException();
 +}
 +#endif
 +

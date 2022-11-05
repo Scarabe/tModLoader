@@ -5,12 +5,13 @@
  using System;
  using System.IO;
  using System.Reflection;
-@@ -64,6 +_,11 @@
+@@ -64,6 +_,12 @@
  			return Assembly.Load(array);
  		};
  
 +#if SERVER
 +		WindowsLaunch._handleRoutine = new WindowsLaunch.HandlerRoutine(WindowsLaunch.ConsoleCtrlCheck);
++
 +		WindowsLaunch.SetConsoleCtrlHandler(WindowsLaunch._handleRoutine, true);
 +#endif
  		Program.LaunchGame(args);

@@ -1,12 +1,15 @@
 --- src/decompiled/ReLogic/OS/Platform.cs
 +++ src/Terraria/ReLogic/OS/Platform.cs
-@@ -1,12 +_,21 @@
+@@ -1,12 +_,24 @@
  using System;
-+using ReLogic.OS.Linux;
-+using ReLogic.OS.OSX;
++#if WINDOWS
  using ReLogic.OS.Windows;
++#elif LINUX
++using ReLogic.OS.Linux;
++#elif MAC
++using ReLogic.OS.OSX;
++#endif
  using ReLogic.Utilities;
-+using System.Runtime.InteropServices;
  
  namespace ReLogic.OS;
  
