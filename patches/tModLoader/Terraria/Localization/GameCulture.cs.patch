@@ -4,8 +4,8 @@
  
  namespace Terraria.Localization
  {
--	public class GameCulture
-+	public partial class GameCulture
+-public class GameCulture
++public partial class GameCulture
+ {
+ 	public enum CultureName
  	{
- 		public enum CultureName
- 		{

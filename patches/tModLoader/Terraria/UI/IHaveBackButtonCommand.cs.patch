@@ -5,20 +5,20 @@
 +
  namespace Terraria.UI
  {
- 	public interface IHaveBackButtonCommand
- 	{
--		void HandleBackButtonUsage();
-+		UIState PreviousUIState { get; set; }
+ public interface IHaveBackButtonCommand
+ {
+-	void HandleBackButtonUsage();
++	UIState PreviousUIState { get; set; }
 +
-+		void HandleBackButtonUsage() {
-+			if (PreviousUIState == null) {
-+				Main.menuMode = 0;
-+				return;
-+			}
-+
-+			Main.menuMode = 888;
-+			Main.MenuUI.SetState(PreviousUIState);
-+			SoundEngine.PlaySound(11);
++	void HandleBackButtonUsage() {
++		if (PreviousUIState == null) {
++			Main.menuMode = 0;
++			return;
 +		}
- 	}
++
++		Main.menuMode = 888;
++		Main.MenuUI.SetState(PreviousUIState);
++		SoundEngine.PlaySound(11);
++	}
+ }
  }

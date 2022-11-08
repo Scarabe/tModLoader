@@ -1,18 +1,19 @@
 --- src/TerrariaNetCore/Terraria/Achievements/AchievementCondition.cs
 +++ src/tModLoader/Terraria/Achievements/AchievementCondition.cs
-@@ -1,5 +_,6 @@
+@@ -1,4 +_,5 @@
  using Newtonsoft.Json;
  using Newtonsoft.Json.Linq;
 +using Terraria.Social;
  
- namespace Terraria.Achievements
- {
-@@ -30,6 +_,8 @@
- 		}
+ namespace Terraria.Achievements;
+@@ -34,6 +_,10 @@
  
- 		public virtual void Complete() {
-+			if (SocialAPI.Mode == SocialMode.Steam) return;
+ 	public virtual void Complete()
+ 	{
++		// Check added by TML.
++		if (SocialAPI.Mode == SocialMode.Steam)
++			return;
 +
- 			if (!_isCompleted) {
- 				_isCompleted = true;
- 				if (this.OnComplete != null)
+ 		if (!_isCompleted) {
+ 			_isCompleted = true;
+ 			if (this.OnComplete != null)

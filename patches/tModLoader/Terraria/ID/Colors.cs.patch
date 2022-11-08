@@ -4,8 +4,8 @@
  
  namespace Terraria.ID
  {
--	public static class Colors
-+	public static partial class Colors
- 	{
- 		public static readonly Color RarityAmber = new Color(255, 175, 0);
- 		public static readonly Color RarityTrash = new Color(130, 130, 130);
+-public static class Colors
++public static partial class Colors
+ {
+ 	public static readonly Color RarityAmber = new Color(255, 175, 0);
+ 	public static readonly Color RarityTrash = new Color(130, 130, 130);

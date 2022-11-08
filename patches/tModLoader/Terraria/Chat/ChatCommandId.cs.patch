@@ -1,11 +1,12 @@
 --- src/TerrariaNetCore/Terraria/Chat/ChatCommandId.cs
 +++ src/tModLoader/Terraria/Chat/ChatCommandId.cs
-@@ -7,7 +_,7 @@
- {
- 	public struct ChatCommandId
- 	{
--		private readonly string _name;
-+		internal readonly string _name;
+@@ -7,8 +_,8 @@
  
- 		private ChatCommandId(string name) {
- 			_name = name;
+ public struct ChatCommandId
+ {
+-	private readonly string _name;
++	internal readonly string _name;
+ 
+ 	private ChatCommandId(string name)
+ 	{
+ 		_name = name;

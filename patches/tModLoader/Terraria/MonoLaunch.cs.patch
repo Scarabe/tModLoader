@@ -12,66 +12,66 @@
  internal static class MonoLaunch
  {
 @@ -14,7 +_,14 @@
- 	private static readonly Dictionary<string, IntPtr> assemblies = new Dictionary<string, IntPtr>();
+ private static readonly Dictionary<string, IntPtr> assemblies = new Dictionary<string, IntPtr>();
  
- 	private static void Main(string[] args) {
-+		if (Array.IndexOf(args, "-tModPorter") is int i && i >= 0) {
-+			tModPorter.Program.Main(args.Skip(i + 1).ToArray()).GetAwaiter().GetResult();
-+			return;
-+		}
+ private static void Main(string[] args) {
++	if (Array.IndexOf(args, "-tModPorter") is int i && i >= 0) {
++		tModPorter.Program.Main(args.Skip(i + 1).ToArray()).GetAwaiter().GetResult();
++		return;
++	}
 +
-+		Thread.CurrentThread.Name = "Entry Thread";
++	Thread.CurrentThread.Name = "Entry Thread";
  #if NETCORE
-+		NativeLibraries.SetNativeLibraryPath(NativesDir);
- 		AssemblyLoadContext.Default.ResolvingUnmanagedDll += ResolveNativeLibrary;
++	NativeLibraries.SetNativeLibraryPath(NativesDir);
+ 	AssemblyLoadContext.Default.ResolvingUnmanagedDll += ResolveNativeLibrary;
  #else
- 		AppDomain.CurrentDomain.AssemblyResolve += delegate (object sender, ResolveEventArgs sargs) {
+ 	AppDomain.CurrentDomain.AssemblyResolve += delegate (object sender, ResolveEventArgs sargs) {
 @@ -32,7 +_,25 @@
  #endif
  
- 		Environment.SetEnvironmentVariable("FNA_WORKAROUND_WINDOW_RESIZABLE", "1");
-+		
-+		// Spawn a thread to use configured default stack size instead of the one reported in the binary
-+		// https://social.msdn.microsoft.com/Forums/office/en-US/7132b30d-9792-4bf3-87ec-7198052e4ed3/main-thread-stack-size?forum=csharpgeneral
-+		// post processing the binary with `editbin /stack:400000 tModLoader.dll` should do it for the main thread but it's annoying
-+		// and duplicates the size defined in the runtimeconfig
-+		// @TODO: Temporary change, make it cross platform, linux crashes if FNA loop is not in the REAL Main thread
-+		//        Atm linux and mac use for main also the env variable so it works
+ 	Environment.SetEnvironmentVariable("FNA_WORKAROUND_WINDOW_RESIZABLE", "1");
++	
++	// Spawn a thread to use configured default stack size instead of the one reported in the binary
++	// https://social.msdn.microsoft.com/Forums/office/en-US/7132b30d-9792-4bf3-87ec-7198052e4ed3/main-thread-stack-size?forum=csharpgeneral
++	// post processing the binary with `editbin /stack:400000 tModLoader.dll` should do it for the main thread but it's annoying
++	// and duplicates the size defined in the runtimeconfig
++	// @TODO: Temporary change, make it cross platform, linux crashes if FNA loop is not in the REAL Main thread
++	//        Atm linux and mac use for main also the env variable so it works
 +
-+		var LocalLaunchGame = () => {
--		Program.LaunchGame(args, monoArgs: true);
-+			Program.LaunchGame(args, monoArgs: true);
-+		};
++	var LocalLaunchGame = () => {
+-	Program.LaunchGame(args, monoArgs: true);
++		Program.LaunchGame(args, monoArgs: true);
++	};
 +
-+		if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-+			new Thread(new ThreadStart(LocalLaunchGame)).Start();
-+			// Move the dummy entry thread to background
-+			Thread.CurrentThread.IsBackground = true;
-+		} else {
-+			LocalLaunchGame();
-+		}
- 	}
++	if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
++		new Thread(new ThreadStart(LocalLaunchGame)).Start();
++		// Move the dummy entry thread to background
++		Thread.CurrentThread.IsBackground = true;
++	} else {
++		LocalLaunchGame();
++	}
+ }
  
  #if NETCORE
 @@ -53,17 +_,17 @@
- 			if (assemblies.TryGetValue(name, out var handle))
- 				return handle;
+ 		if (assemblies.TryGetValue(name, out var handle))
+ 			return handle;
  
--			Console.WriteLine($"Native Resolve: {assembly.FullName} -> {name}");
-+			Logging.tML.Debug($"Native Resolve: {assembly.FullName} -> {name}");
+-		Console.WriteLine($"Native Resolve: {assembly.FullName} -> {name}");
++		Logging.tML.Debug($"Native Resolve: {assembly.FullName} -> {name}");
  
- 			var files = Directory.GetFiles(NativesDir, $"*{name}*", SearchOption.AllDirectories);
- 			if (files.FirstOrDefault() is not string path) {
--				Console.WriteLine("\tnot found");
-+				Logging.tML.Debug("\tnot found");
- 				return IntPtr.Zero;
- 			}
- 
--			Console.WriteLine($"\tattempting load {path}");
-+			Logging.tML.Debug($"\tattempting load {path}");
- 			handle = NativeLibrary.Load(path);
--			Console.WriteLine("\tsuccess");
-+			Logging.tML.Debug("\tsuccess");
- 			return assemblies[name] = handle;
+ 		var files = Directory.GetFiles(NativesDir, $"*{name}*", SearchOption.AllDirectories);
+ 		if (files.FirstOrDefault() is not string path) {
+-			Console.WriteLine("\tnot found");
++			Logging.tML.Debug("\tnot found");
+ 			return IntPtr.Zero;
  		}
+ 
+-		Console.WriteLine($"\tattempting load {path}");
++		Logging.tML.Debug($"\tattempting load {path}");
+ 		handle = NativeLibrary.Load(path);
+-		Console.WriteLine("\tsuccess");
++		Logging.tML.Debug("\tsuccess");
+ 		return assemblies[name] = handle;
  	}
+ }

@@ -1,22 +1,23 @@
 --- src/TerrariaNetCore/Terraria/Chat/ChatCommandProcessor.cs
 +++ src/tModLoader/Terraria/Chat/ChatCommandProcessor.cs
-@@ -3,6 +_,7 @@
+@@ -2,6 +_,7 @@
  using System.Linq;
+ using ReLogic.Utilities;
  using Terraria.Chat.Commands;
  using Terraria.Localization;
 +using Terraria.ModLoader;
  
- namespace Terraria.Chat
- {
-@@ -99,6 +_,11 @@
- 		}
+ namespace Terraria.Chat;
+@@ -106,7 +_,12 @@
+ 	}
  
- 		public void ProcessIncomingMessage(ChatMessage message, int clientId) {
-+			if (message.CommandId._name == "Say" && CommandLoader.HandleCommand(message.Text, new PlayerCommandCaller(Main.player[clientId]))) {
-+				message.Consume();
-+				return;
-+			}
+ 	public void ProcessIncomingMessage(ChatMessage message, int clientId)
+ 	{
++		if (message.CommandId._name == "Say" && CommandLoader.HandleCommand(message.Text, new PlayerCommandCaller(Main.player[clientId]))) {
++			message.Consume();
++			return;
++		}
 +
- 			if (_commands.TryGetValue(message.CommandId, out IChatCommand value)) {
- 				value.ProcessIncomingMessage(message.Text, (byte)clientId);
- 				message.Consume();
+ 		if (_commands.TryGetValue(message.CommandId, out var value)) {
+ 			value.ProcessIncomingMessage(message.Text, (byte)clientId);
+ 			message.Consume();

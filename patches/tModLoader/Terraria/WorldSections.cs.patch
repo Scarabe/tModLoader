@@ -4,8 +4,8 @@
  
  namespace Terraria
  {
--	public class WorldSections
-+	public partial class WorldSections
+-public class WorldSections
++public partial class WorldSections
+ {
+ 	private struct IterationState
  	{
- 		private struct IterationState
- 		{

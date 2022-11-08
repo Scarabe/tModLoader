@@ -2,10 +2,10 @@
 +++ src/tModLoader/Terraria/Map/PingMapLayer.cs
 @@ -10,6 +_,8 @@
  {
- 	public class PingMapLayer : IMapLayer
- 	{
-+		public bool Visible { get; set; } = true;
+ public class PingMapLayer : IMapLayer
+ {
++	public bool Visible { get; set; } = true;
 +
- 		private struct Ping
- 		{
- 			public readonly Vector2 Position;
+ 	private struct Ping
+ 	{
+ 		public readonly Vector2 Position;

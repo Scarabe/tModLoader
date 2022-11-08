@@ -8,23 +8,24 @@
  using Terraria.UI;
  using Terraria.UI.Chat;
  
-@@ -99,11 +_,19 @@
- 		private string GetFriendlyName() {
- 			switch (_keybind) {
- 				default:
-+					if (KeybindLoader.modKeybinds.TryGetValue(_keybind, out ModKeybind modKeybind))
-+						return modKeybind.DisplayName.GetTranslation(Language.ActiveCulture);
- 					return _keybind;
- 				case "MouseLeft":
- 					return Lang.menu[162].Value;
- 				case "MouseRight":
- 					return Lang.menu[163].Value;
-+				case "MouseMiddle":
-+					return Language.GetTextValue("tModLoader.MouseMiddle");
-+				case "MouseXButton1":
-+					return Language.GetTextValue("tModLoader.MouseXButton1");
-+				case "MouseXButton2":
-+					return Language.GetTextValue("tModLoader.MouseXButton2");
- 				case "Up":
- 					return Lang.menu[148].Value;
- 				case "Down":
+@@ -105,6 +_,11 @@
+ 		return _keybind switch {
+ 			"MouseLeft" => Lang.menu[162].Value,
+ 			"MouseRight" => Lang.menu[163].Value,
++			// Support for extra mouse buttons: [[
++			"MouseMiddle" => Language.GetTextValue("tModLoader.MouseMiddle"),
++			"MouseXButton1" =>Language.GetTextValue("tModLoader.MouseXButton1"),
++			"MouseXButton2" => Language.GetTextValue("tModLoader.MouseXButton2"),
++			// ]]
+ 			"Up" => Lang.menu[148].Value,
+ 			"Down" => Lang.menu[149].Value,
+ 			"Left" => Lang.menu[150].Value,
+@@ -155,6 +_,8 @@
+ 			"Loadout2" => Language.GetTextValue("UI.Loadout2"),
+ 			"Loadout3" => Language.GetTextValue("UI.Loadout3"),
+ 			"ToggleCameraMode" => Language.GetTextValue("UI.ToggleCameraMode"),
++			// Handle mod keybinds
++			_ when KeybindLoader.modKeybinds.TryGetValue(_keybind, out var modKeybind) => modKeybind.DisplayName.GetTranslation(Language.ActiveCulture).
+ 			_ => _keybind,
+ 		};
+ 	}
