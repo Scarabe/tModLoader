@@ -29,7 +29,7 @@
  			for (int i = 0; i < numLines; i++) {
  				if (_toolTipLines[i].ToLower().IndexOf(_search, StringComparison.OrdinalIgnoreCase) != -1)
  					return true;
-@@ -305,8 +_,8 @@
+@@ -353,8 +_,8 @@
  		private bool[] _fitsFilterByItemType;
  
  		public MiscFallback(List<IItemEntryFilter> otherFiltersToCheckAgainst)

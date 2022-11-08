@@ -46,30 +46,30 @@
  		switch (tile.type) {
  			case 5: {
 @@ -268,9 +_,24 @@
- 				}
+ 			}
  			case 323: {
- 					int textureIndex = 15;
-+					bool isOcean = false;
+ 				int textureIndex = 15;
++				bool isOcean = false;
 +
- 					if (x >= WorldGen.beachDistance && x <= Main.maxTilesX - WorldGen.beachDistance)
-+						isOcean = true;
+ 				if (x >= WorldGen.beachDistance && x <= Main.maxTilesX - WorldGen.beachDistance)
++					isOcean = true;
 +
-+					if (isOcean)
- 						textureIndex = 21;
++				if (isOcean)
+ 					textureIndex = 21;
  
-+					// Modded Palm Tree Leafage is indexed at -2 * growOnTile.type for Ocean, and -(2 * growOnTile.type + 1) for Oasis
-+					// This unique selection is to avoid collision with ModTree leafage
-+					if (Math.Abs(tileStyle) >= ModPalmTree.VanillaStyleCount) {
-+						textureIndex = (Math.Abs(tileStyle) - ModPalmTree.VanillaStyleCount);
-+						textureIndex *= -2;
++				// Modded Palm Tree Leafage is indexed at -2 * growOnTile.type for Ocean, and -(2 * growOnTile.type + 1) for Oasis
++				// This unique selection is to avoid collision with ModTree leafage
++				if (Math.Abs(tileStyle) >= ModPalmTree.VanillaStyleCount) {
++					textureIndex = (Math.Abs(tileStyle) - ModPalmTree.VanillaStyleCount);
++					textureIndex *= -2;
 +
-+						if (!isOcean)
-+							textureIndex -= 1;
-+					}
++					if (!isOcean)
++						textureIndex -= 1;
++				}
 +
- 					TilePaintSystemV2.TreeFoliageVariantKey treeFoliageVariantKey = default(TilePaintSystemV2.TreeFoliageVariantKey);
- 					treeFoliageVariantKey.TextureIndex = textureIndex;
- 					treeFoliageVariantKey.PaintColor = tile.color();
+ 				TilePaintSystemV2.TreeFoliageVariantKey treeFoliageVariantKey = default(TilePaintSystemV2.TreeFoliageVariantKey);
+ 				treeFoliageVariantKey.TextureIndex = textureIndex;
+ 				treeFoliageVariantKey.PaintColor = tile.color();
 @@ -396,8 +_,10 @@
  		byte b = (byte)(100f + 150f * Main.martianLight);
  		_martianGlow = new Color(b, b, b, 0);
@@ -279,38 +279,37 @@
  		tileTop = 0;
  		tileWidth = 16;
 @@ -3224,6 +_,10 @@
- 					tileWidth = 20;
- 					tileHeight = 20;
- 					int treeBiome = GetTreeBiome(x, y, tileFrameX, tileFrameY);
+ 				tileWidth = 20;
+ 				tileHeight = 20;
+ 				int treeBiome = GetTreeBiome(x, y, tileFrameX, tileFrameY);
 +
-+					if (treeBiome >= ModTree.VanillaStyleCount)
-+						break;
++				if (treeBiome >= ModTree.VanillaStyleCount)
++					break;
 +
- 					tileFrameX += (short)(176 * (treeBiome + 1));
- 					break;
- 				}
+ 				tileFrameX += (short)(176 * (treeBiome + 1));
+ 				break;
+ 			}
 @@ -3248,6 +_,12 @@
- 					tileWidth = 20;
- 					tileHeight = 20;
- 					int palmTreeBiome = GetPalmTreeBiome(x, y);
+ 				tileWidth = 20;
+ 				tileHeight = 20;
+ 				int palmTreeBiome = GetPalmTreeBiome(x, y);
 +
-+					if (Math.Abs(palmTreeBiome) >= ModPalmTree.VanillaStyleCount) {
-+						tileFrameY = (short)(22 * (palmTreeBiome < 0 ? 1 : 0));
-+						break;
-+					}
++				if (Math.Abs(palmTreeBiome) >= ModPalmTree.VanillaStyleCount) {
++					tileFrameY = (short)(22 * (palmTreeBiome < 0 ? 1 : 0));
++					break;
++				}
 +
- 					tileFrameY = (short)(22 * palmTreeBiome);
- 					break;
+ 				tileFrameY = (short)(22 * palmTreeBiome);
+ 				break;
+ 			}
+@@ -4817,9 +_,16 @@
+ 					glowColor = _meteorGlow;
  				}
-@@ -4816,10 +_,17 @@
- 						glowSourceRect = new Rectangle(tileFrameX, tileFrameY % 38, tileWidth, tileHeight);
- 						glowColor = _meteorGlow;
- 					}
-+					
-+					// Extra patch context.
  
- 					break;
- 				}
++				// Extra patch context.
++
+ 				break;
+ 			}
  		}
 +
 +		// End of GetTileDrawData

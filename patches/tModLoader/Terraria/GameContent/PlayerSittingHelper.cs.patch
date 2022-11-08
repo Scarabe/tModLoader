@@ -19,7 +19,7 @@
  			return false;
  
 @@ -263,7 +_,21 @@
- 				}
+ 			}
  		}
  
 -		playerSittingPosition = new Point(num, num2 + 1).ToWorldCoordinates(8f, 16f);

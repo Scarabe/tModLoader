@@ -51,16 +51,16 @@
 +						break;
  					case 's':
  					case 'x': {
- 							if (int.TryParse(array[i].Substring(1), out var result3))
+ 						if (int.TryParse(array[i].Substring(1), out var result3))
 @@ -82,7 +_,7 @@
- 						}
+ 					}
  					case 'p': {
- 							if (int.TryParse(array[i].Substring(1), out var result2))
--								item.Prefix((byte)Utils.Clamp(result2, 0, 85));
-+								item.Prefix((byte)Utils.Clamp(result2, 0, PrefixLoader.PrefixCount));
+ 						if (int.TryParse(array[i].Substring(1), out var result2))
+-							item.Prefix((byte)Utils.Clamp(result2, 0, 85));
++							item.Prefix((byte)Utils.Clamp(result2, 0, PrefixLoader.PrefixCount));
  
- 							break;
- 						}
+ 						break;
+ 					}
 @@ -101,14 +_,26 @@
  		};
  	}

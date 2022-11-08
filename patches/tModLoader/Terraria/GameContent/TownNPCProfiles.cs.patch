@@ -6,7 +6,7 @@
 +using Terraria.ModLoader;
  
  namespace Terraria.GameContent;
-@@ -53,13 +_,34 @@
+@@ -83,13 +_,35 @@
  		{ 684, new Profiles.LegacyNPCProfile("Images/TownNPCs/SlimeCopper", 53) }	};
  	public static TownNPCProfiles Instance = new TownNPCProfiles();
  
@@ -25,6 +25,7 @@
 +		return profile != null;
 +	}
 +
++	// Added by TML.
 +	internal void ResetTexturesAccordingToVanillaProfiles()
 +	{
 +		foreach (KeyValuePair<int, ITownNPCProfile> pair in _townNPCProfiles) {

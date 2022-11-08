@@ -1,13 +1,13 @@
 --- src/TerrariaNetCore/Terraria/GameContent/Bestiary/BestiaryDatabaseNPCsPopulator.cs
 +++ src/tModLoader/Terraria/GameContent/Bestiary/BestiaryDatabaseNPCsPopulator.cs
-@@ -1,6 +_,7 @@
- using System.Collections.Generic;
+@@ -2,6 +_,7 @@
  using System.Linq;
  using Microsoft.Xna.Framework;
  using Terraria.ID;
 +using Terraria.ModLoader;
  
  namespace Terraria.GameContent.Bestiary;
+ 
 @@ -213,7 +_,19 @@
  				SpawnConditions.Biomes.SolarPillar,
  				SpawnConditions.Biomes.VortexPillar,
@@ -42,16 +42,26 @@
  	private BestiaryEntry Register(BestiaryEntry entry) => _currentDatabase.Register(entry);
  	private IBestiaryEntryFilter Register(IBestiaryEntryFilter filter) => _currentDatabase.Register(filter);
  
-@@ -537,7 +_,8 @@
- 	}
+@@ -578,6 +_,10 @@
  
  	private void AddTownNPCs_Manual()
  	{
-+		return; //Town NPCs are loaded automatically now so it just returns.
++		// Town NPCs are loaded automatically now so it just returns.
++		return;
++		
++		/*
  		Register(BestiaryEntry.TownNPC(22));
  		Register(BestiaryEntry.TownNPC(17));
  		Register(BestiaryEntry.TownNPC(18));
-@@ -587,13 +_,19 @@
+@@ -618,6 +_,7 @@
+ 		Register(BestiaryEntry.TownNPC(682));
+ 		Register(BestiaryEntry.TownNPC(683));
+ 		Register(BestiaryEntry.TownNPC(684));
++		*/
+ 	}
+ 
+ 	private void AddMultiEntryNPCS_Manual()
+@@ -627,13 +_,19 @@
  
  	private void AddEmptyEntries_CrittersAndEnemies_Automated()
  	{

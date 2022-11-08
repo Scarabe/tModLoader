@@ -12,7 +12,7 @@
 +	internal class Prefixes
  	{
  		public static int[] PrefixesForSwords = new int[40] {
-@@ -44,7 +_,7 @@
+@@ -197,7 +_,7 @@
  
  	public class ItemSets
  	{

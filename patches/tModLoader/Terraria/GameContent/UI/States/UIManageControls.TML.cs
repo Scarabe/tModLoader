@@ -32,18 +32,6 @@ public partial class UIManageControls : UIState
 
 	private void OnAssembleBindPanels(ReadOnlySpan<List<string>> bindingsWithMouseButtons)
 	{
-		// Add support for extra mouse button usage
-		for (int i = 0; i < bindingsWithMouseButtons.Length; i++) {
-			var list = bindingsWithMouseButtons[i];
-			int insertionIndex = list.FindLastIndex(s => s.Contains("Mouse")) + 1;
-
-			list.InsertRange(insertionIndex, new[] {
-				"MouseMiddle",
-				"MouseXButton1",
-				"MouseXButton2",
-			});
-		}
-
 		// Handle mod keybinds
 
 		_BindingsFullLine.RemoveAll(x => x.Contains('/')); // Removes Mod keybinds?

@@ -16,19 +16,38 @@
  {
  	public static int ForceMoveTo = -1;
  	private const float PanelTextureHeight = 30f;
-@@ -209,6 +_,11 @@
- 			"sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp14", "sp15", "sp16", "sp17",
- 			"sp18", "sp19", "sp13"
+@@ -215,6 +_,10 @@
+ 		List<string> bindings = new List<string> {
+ 			"MouseLeft",
+ 			"MouseRight",
++			// Extra mouse buttons support
++			TriggerNames.MouseMiddle,
++			TriggerNames.MouseXButton1,
++			TriggerNames.MouseXButton2,
+ 			"Up",
+ 			"Down",
+ 			"Left",
+@@ -242,6 +_,10 @@
+ 		List<string> bindings2 = new List<string> {
+ 			"MouseLeft",
+ 			"MouseRight",
++			// Extra mouse buttons support
++			TriggerNames.MouseMiddle,
++			TriggerNames.MouseXButton1,
++			TriggerNames.MouseXButton2,
+ 			"Up",
+ 			"Down",
+ 			"Left",
+@@ -313,6 +_,8 @@
+ 			"sp19",
+ 			"sp13"
  		};
 +		
-+		OnAssembleBindPanels(bindingsWithMouseButtons: new[] {
-+			bindings,
-+			bindings2,
-+		});
++		OnAssembleBindPanels();
  
  		InputMode currentInputMode = InputMode.Keyboard;
  		_bindsKeyboard.Add(CreateBindingGroup(0, bindings, currentInputMode));
-@@ -230,6 +_,8 @@
+@@ -334,6 +_,8 @@
  		_bindsGamepadUI.Add(CreateBindingGroup(2, bindings3, currentInputMode));
  		_bindsGamepadUI.Add(CreateBindingGroup(3, bindings5, currentInputMode));
  		_bindsGamepadUI.Add(CreateBindingGroup(4, bindings6, currentInputMode));
@@ -37,7 +56,7 @@
  	}
  
  	private UISortableElement CreateBindingGroup(int elementIndex, List<string> bindings, InputMode currentInputMode)
-@@ -268,6 +_,10 @@
+@@ -372,6 +_,10 @@
  			case 4:
  				uIPanel.BackgroundColor = Color.Lerp(uIPanel.BackgroundColor, Color.Turquoise, 0.18f);
  				break;
@@ -48,7 +67,7 @@
  		}
  
  		CreateElementGroup(uIList, bindings, currentInputMode, uIPanel.BackgroundColor);
-@@ -289,6 +_,10 @@
+@@ -393,6 +_,10 @@
  			case 4:
  				text = Lang.menu[198];
  				break;
@@ -59,7 +78,7 @@
  		}
  
  		UITextPanel<LocalizedText> element = new UITextPanel<LocalizedText>(text, 0.7f) {
-@@ -332,6 +_,16 @@
+@@ -436,6 +_,16 @@
  				continue;
  			}
  
@@ -76,7 +95,7 @@
  			UIElement uIElement3 = CreatePanel(bindings[i], currentInputMode, color);
  			uIElement3.Width.Set(-5f, 0.5f);
  			uIElement3.Height.Set(0f, 1f);
-@@ -515,12 +_,26 @@
+@@ -619,12 +_,26 @@
  					}
  				}, 1008, color);
  			default:
