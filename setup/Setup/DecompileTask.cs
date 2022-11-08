@@ -87,16 +87,27 @@ namespace Terraria.ModLoader.Setup
 
 		private ExtendedProjectDecompiler projectDecompiler;
 
-		private readonly DecompilerSettings decompilerSettings = new(LanguageVersion.Latest)
-		{
-			RemoveDeadCode = true,
-			CSharpFormattingOptions = FormattingOptionsFactory.CreateKRStyle()
-		};
+		private readonly DecompilerSettings decompilerSettings;
 
 		public DecompileTask(ITaskInterface taskInterface, string srcDir, bool serverOnly = false) : base(taskInterface)
 		{
 			this.srcDir = srcDir;
 			this.serverOnly = serverOnly;
+
+			var formatting = FormattingOptionsFactory.CreateKRStyle();
+
+			// Arrays should have a new line for every entry, since it's easier to insert values in patches that way.
+			formatting.ArrayInitializerWrapping = Wrapping.WrapAlways;
+			formatting.ArrayInitializerBraceStyle = BraceStyle.EndOfLine;
+
+			// Force wrapping for chained calls for the same reason.
+			// Hm, doesn't work.
+			//formatting.ChainedMethodCallWrapping = Wrapping.WrapAlways;
+
+			decompilerSettings = new(LanguageVersion.Latest) {
+				RemoveDeadCode = true,
+				CSharpFormattingOptions = formatting
+			};
 		}
 
 		public override bool ConfigurationDialog()
