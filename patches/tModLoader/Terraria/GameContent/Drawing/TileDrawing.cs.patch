@@ -341,7 +341,7 @@
  		_specialTileX[_specialTilesCount] = x;
  		_specialTileY[_specialTilesCount] = y;
  		_specialTilesCount++;
-@@ -5507,14 +_,30 @@
+@@ -5513,14 +_,30 @@
  		}
  	}
  
@@ -374,7 +374,7 @@
  	{
  		Tile tile = Main.tile[x, y + 1];
  		if (!WorldGen.SolidTile(tile) && tile.liquid <= 0) {
-@@ -5524,7 +_,14 @@
+@@ -5530,7 +_,14 @@
  		}
  	}
  
@@ -390,7 +390,7 @@
  	{
  		int num = 0;
  		if (Main.WindForVisuals > 0.2f)
-@@ -5581,6 +_,8 @@
+@@ -5587,6 +_,8 @@
  			type = 706;
  		else if (Main.waterStyle == 12)
  			type = 1147;
@@ -399,7 +399,7 @@
  		else if (Main.waterStyle > 1)
  			type = 706 + Main.waterStyle - 1;
  
-@@ -5606,7 +_,18 @@
+@@ -5612,7 +_,18 @@
  		_gore[num2].velocity *= 0f;
  	}
  
@@ -419,7 +419,7 @@
  	{
  		if (!Main.SettingsEnabled_TilesSwayInWind)
  			return 0f;
-@@ -5630,7 +_,23 @@
+@@ -5636,7 +_,23 @@
  		return num2 * lerpValue;
  	}
  
@@ -444,7 +444,7 @@
  	{
  		if (!Main.SettingsEnabled_TilesSwayInWind)
  			return false;
-@@ -5919,8 +_,11 @@
+@@ -5925,8 +_,11 @@
  					Main.spriteBatch.Draw(value6, position2, value7, color6, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
  				}
  
@@ -456,7 +456,7 @@
  		}
  	}
  
-@@ -6172,6 +_,26 @@
+@@ -6178,6 +_,26 @@
  						num20 = 2;
  					}
  
@@ -483,7 +483,7 @@
  					int frameY2 = Main.tile[x, y].frameY;
  					byte tileColor4 = tile.color();
  					Texture2D treeTopTexture2 = GetTreeTopTexture(treeTextureIndex, palmTreeBiome, tileColor4);
-@@ -6197,17 +_,26 @@
+@@ -6203,17 +_,26 @@
  	private Texture2D GetTreeTopTexture(int treeTextureIndex, int treeTextureStyle, byte tileColor)
  	{
  		Texture2D texture2D = _paintSystem.TryGetTreeTopAndRequestIfNotReady(treeTextureIndex, treeTextureStyle, tileColor);
@@ -512,7 +512,7 @@
  
  		return texture2D;
  	}
-@@ -6356,8 +_,8 @@
+@@ -6362,8 +_,8 @@
  	}
  
  	private void DrawAnimatedTile_AdjustForVisionChangers(int i, int j, Tile tileCache, ushort typeCache, short tileFrameX, short tileFrameY, ref Color tileLight, bool canDoDust)
@@ -522,7 +522,7 @@
  			if (tileLight.R < byte.MaxValue)
  				tileLight.R = byte.MaxValue;
  
-@@ -6376,7 +_,7 @@
+@@ -6382,7 +_,7 @@
  			}
  		}
  
@@ -531,7 +531,7 @@
  			if (tileLight.R < 200)
  				tileLight.R = 200;
  
-@@ -6416,7 +_,18 @@
+@@ -6422,7 +_,18 @@
  		}
  	}
  
@@ -551,7 +551,7 @@
  	{
  		_windGrid.GetWindTime(i, j, pushAnimationTimeTotal, out var windTimeLeft, out var directionX, out var _);
  		if (windTimeLeft >= pushAnimationTimeTotal / 2)
-@@ -6438,7 +_,19 @@
+@@ -6444,7 +_,19 @@
  		}
  	}
  

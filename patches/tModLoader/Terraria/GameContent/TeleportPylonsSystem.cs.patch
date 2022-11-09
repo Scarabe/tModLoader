@@ -97,10 +97,10 @@
 +				/*
  				flag = false;
 +				*/
- 				key = num switch {
- 					1 => "Net.CannotTeleportToPylonBecauseNotEnoughNPCsAtCurrentPylon",
- 					2 => "Net.CannotTeleportToPylonBecauseNotMeetingBiomeRequirements",
-@@ -162,8 +_,17 @@
+ 				switch (num) {
+ 					default:
+ 						key = "Net.CannotTeleportToPylonBecausePlayerIsNotNearAPylon";
+@@ -168,8 +_,17 @@
  			}
  		}
  
@@ -119,7 +119,7 @@
  			int num2 = 9;
  			int typeOfPylon = (int)info.TypeOfPylon;
  			int number = 0;
-@@ -179,19 +_,35 @@
+@@ -185,19 +_,35 @@
  		}
  	}
  
@@ -155,7 +155,7 @@
  		Rectangle rectangle = new Rectangle(centerPoint.X - Main.buffScanAreaWidth / 2, centerPoint.Y - Main.buffScanAreaHeight / 2, Main.buffScanAreaWidth, Main.buffScanAreaHeight);
  		int num = necessaryNPCCount;
  		for (int i = 0; i < 200; i++) {
-@@ -220,6 +_,12 @@
+@@ -226,6 +_,12 @@
  	{
  		if (Main.netMode != 2 && Main.DroneCameraTracker != null && Main.DroneCameraTracker.IsInUse())
  			return false;

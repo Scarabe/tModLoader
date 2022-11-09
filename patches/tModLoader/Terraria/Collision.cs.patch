@@ -17,6 +17,6 @@
  					int num5 = tile.blockType();
 -					if (tile.type != 19) {
 +					if (!TileID.Sets.Platforms[tile.type]) {
- 						return num5 switch {
- 							1 => 0f,
- 							2 => (float)Math.PI / 4f,
+ 						switch (num5) {
+ 							case 1:
+ 								return 0f;

@@ -106,7 +106,12 @@ namespace Terraria.ModLoader.Setup
 
 			decompilerSettings = new(LanguageVersion.Latest) {
 				RemoveDeadCode = true,
-				CSharpFormattingOptions = formatting
+				CSharpFormattingOptions = formatting,
+
+				// Switch expressions are not patching-friendly,
+				// and do not even support expression bodies at this time:
+				// https://github.com/dotnet/csharplang/issues/3037
+				SwitchExpressions = false,
 			};
 		}
 

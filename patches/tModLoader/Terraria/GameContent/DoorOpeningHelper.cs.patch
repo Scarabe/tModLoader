@@ -22,7 +22,7 @@
  				return DoorCloseAttemptResult.DoorIsInvalidated;
  
  			int num = tile.frameX % 72 / 18;
-@@ -329,9 +_,12 @@
+@@ -332,9 +_,12 @@
  		if (tile == null)
  			return false;
  

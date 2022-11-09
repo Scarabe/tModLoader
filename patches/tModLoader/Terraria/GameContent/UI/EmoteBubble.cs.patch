@@ -68,10 +68,10 @@
 +			return new WorldUIAnchor(Main.projectile[whoAmI]);
 +		}
 +
- 		return type switch {
- 			0 => new WorldUIAnchor(Main.npc[meta]),
- 			1 => new WorldUIAnchor(Main.player[meta]),
-@@ -364,8 +_,8 @@
+ 		switch (type) {
+ 			case 0:
+ 				return new WorldUIAnchor(Main.npc[meta]);
+@@ -368,8 +_,8 @@
  	}
  
  	private void ProbeTownNPCs(List<int> list)
@@ -81,7 +81,7 @@
  			CountNPCs[i] = 0;
  		}
  
-@@ -375,7 +_,7 @@
+@@ -379,7 +_,7 @@
  		}
  
  		int type = ((NPC)anchor.entity).type;

@@ -22,7 +22,7 @@
  			RejectPlacementFromNet(x, y);
  			return;
  		}
-@@ -148,6 +_,9 @@
+@@ -157,6 +_,9 @@
  
  	public static int PlacementPreviewHook_CheckIfCanPlace(int x, int y, int type = 597, int style = 0, int direction = 1, int alternate = 0)
  	{
