@@ -5,9 +5,9 @@
 +
  namespace Terraria.DataStructures;
  
--public abstract class AEntitySource_OnHit : IEntitySource
 +//TML: Made non-abstract
 +/*
+-public abstract class AEntitySource_OnHit : IEntitySource
 +public class AEntitySource_OnHit : IEntitySource
 +*/
 +public class EntitySource_OnHit : IEntitySource

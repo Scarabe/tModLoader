@@ -5,8 +5,8 @@
  	public readonly Chest Chest;
  
 -	public EntitySource_OverfullChest(int tileCoordsX, int tileCoordsY, Chest chest)
--		: base(tileCoordsX, tileCoordsY)
 +	public EntitySource_OverfullChest(int tileCoordsX, int tileCoordsY, Chest chest, string? context)
+-		: base(tileCoordsX, tileCoordsY)
 +		: base(tileCoordsX, tileCoordsY, context)
  	{
  		Chest = chest;

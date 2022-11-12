@@ -1,7 +1,6 @@
 --- src/TerrariaNetCore/Terraria/GameContent/UI/Elements/UIBestiaryEntryGrid.cs
 +++ src/tModLoader/Terraria/GameContent/UI/Elements/UIBestiaryEntryGrid.cs
-@@ -109,8 +_,8 @@
- 	}
+@@ -110,7 +_,7 @@
  
  	private void FixBestiaryRange(int offset, int maxEntriesToHave)
  	{

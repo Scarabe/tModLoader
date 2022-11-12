@@ -1,11 +1,12 @@
 --- src/TerrariaNetCore/Terraria/GameContent/Personalities/BiomePreferenceListTrait.cs
 +++ src/tModLoader/Terraria/GameContent/Personalities/BiomePreferenceListTrait.cs
-@@ -1,4 +_,5 @@
+@@ -1,5 +_,6 @@
  using System.Collections;
  using System.Collections.Generic;
 +using System.Linq;
  
  namespace Terraria.GameContent.Personalities;
+ 
 @@ -8,9 +_,9 @@
  	public class BiomePreference
  	{
@@ -18,7 +19,7 @@
  		{
  			Affection = affection;
  			Biome = biome;
-@@ -19,7 +_,10 @@
+@@ -19,6 +_,9 @@
  
  	private List<BiomePreference> _preferences;
  
@@ -28,19 +29,17 @@
  	public BiomePreferenceListTrait()
  	{
  		_preferences = new List<BiomePreference>();
- 	}
 @@ -29,7 +_,8 @@
  		_preferences.Add(preference);
  	}
  
--	public void Add(AffectionLevel level, AShoppingBiome biome)
 +	//TML: Changed parameter from AShoppingBiome to IShoppingBiome
+-	public void Add(AffectionLevel level, AShoppingBiome biome)
 +	public void Add(AffectionLevel level, IShoppingBiome biome)
  	{
  		_preferences.Add(new BiomePreference(level, biome));
  	}
-@@ -49,7 +_,11 @@
- 
+@@ -50,6 +_,10 @@
  	private void ApplyPreference(BiomePreference preference, HelperInfo info, ShopHelper shopHelperInstance)
  	{
  		string nameKey = preference.Biome.NameKey;

@@ -28,8 +28,7 @@
  		return entry;
  	}
  
-@@ -52,8 +_,8 @@
- 	}
+@@ -53,7 +_,7 @@
  
  	public void Merge(ItemDropDatabase dropsDatabase)
  	{

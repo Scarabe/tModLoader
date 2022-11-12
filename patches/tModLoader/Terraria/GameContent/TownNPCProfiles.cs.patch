@@ -1,11 +1,12 @@
 --- src/TerrariaNetCore/Terraria/GameContent/TownNPCProfiles.cs
 +++ src/tModLoader/Terraria/GameContent/TownNPCProfiles.cs
-@@ -1,3 +_,5 @@
+@@ -1,4 +_,6 @@
  using System.Collections.Generic;
 +using Terraria.ID;
 +using Terraria.ModLoader;
  
  namespace Terraria.GameContent;
+ 
 @@ -83,13 +_,35 @@
  		{ 684, new Profiles.LegacyNPCProfile("Images/TownNPCs/SlimeCopper", 53) }	};
  	public static TownNPCProfiles Instance = new TownNPCProfiles();

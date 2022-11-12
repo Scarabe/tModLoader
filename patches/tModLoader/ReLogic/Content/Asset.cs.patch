@@ -79,10 +79,10 @@
  		if (IsDisposed)
  			return;
  
--		if (disposing && Value != null) {
--			IDisposable disposable = Value as IDisposable;
 +		//TML: 'Value' changed to 'ownValue'.
+-		if (disposing && Value != null) {
 +		if (disposing && ownValue != null) {
+-			IDisposable disposable = Value as IDisposable;
 +			IDisposable disposable = ownValue as IDisposable;
  			if (IsLoaded)
  				disposable?.Dispose();

@@ -12,9 +12,8 @@
 +	public string? Context { get; }
  
 -	public EntitySource_Loot(Entity entity)
--	{
 +	public EntitySource_Loot(Entity entity, string? context = null)
-+	{
+ 	{
  		Entity = entity;
 +		Context = context;
  	}

@@ -1,0 +1,17 @@
+--- src/TerrariaNetCore/ReLogic/OS/Platform.cs
++++ src/tModLoader/ReLogic/OS/Platform.cs
+@@ -1,9 +_,11 @@
+ using System;
+-#if WINDOWS
++#if WINDOWS || NETCORE
+ using ReLogic.OS.Windows;
+-#elif LINUX
++#endif
++#if LINUX || NETCORE
+ using ReLogic.OS.Linux;
+-#elif MAC
++#endif
++#if MAC || NETCORE
+ using ReLogic.OS.OSX;
+ #endif
+ using ReLogic.Utilities;

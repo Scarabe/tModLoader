@@ -16,7 +16,7 @@
  {
  	public class MiscSettingsTEMP
  	{
-@@ -414,10 +_,31 @@
+@@ -464,10 +_,31 @@
  		}
  	}
  
@@ -48,7 +48,7 @@
  		PlayerInputProfile playerInputProfile = new PlayerInputProfile("Redigit's Pick");
  		playerInputProfile.Initialize(PresetProfiles.Redigit);
  		Profiles.Add(playerInputProfile.Name, playerInputProfile);
-@@ -468,7 +_,10 @@
+@@ -518,7 +_,10 @@
  
  	public static void Load()
  	{
@@ -60,7 +60,7 @@
  		Dictionary<string, PlayerInputProfile> dictionary = new Dictionary<string, PlayerInputProfile>();
  		string currentValue = null;
  		Main.InputProfiles.Get("Selected Profile", ref currentValue);
-@@ -545,6 +_,10 @@
+@@ -660,6 +_,10 @@
  
  	public static void UpdateInput()
  	{
@@ -71,7 +71,7 @@
  		SettingsForUI.UpdateCounters();
  		Triggers.Reset();
  		ScrollWheelValueOld = ScrollWheelValue;
-@@ -576,6 +_,12 @@
+@@ -691,6 +_,12 @@
  		UpdateMainMouse();
  		Main.mouseLeft = Triggers.Current.MouseLeft;
  		Main.mouseRight = Triggers.Current.MouseRight;
@@ -84,7 +84,7 @@
  		CacheZoomableValues();
  		if (num != 0 && PlayerInput.OnActionableInput != null)
  			PlayerInput.OnActionableInput();
-@@ -788,6 +_,10 @@
+@@ -903,6 +_,10 @@
  			}
  		}
  
@@ -95,26 +95,28 @@
  		bool flag5 = ItemID.Sets.GamepadWholeScreenUseRange[player.inventory[player.selectedItem].type] || player.scope;
  		int num3 = player.inventory[player.selectedItem].tileBoost + ItemID.Sets.GamepadExtraRange[player.inventory[player.selectedItem].type];
  		if (player.yoyoString && ItemID.Sets.Yoyo[player.inventory[player.selectedItem].type])
-@@ -1087,6 +_,9 @@
+@@ -1202,6 +_,9 @@
  
  	private static void FixDerpedRebinds()
  	{
 +		// These keys are specially setup to avoid creating a situation where the game might soft-lock due to binding issues. (IE stuck on a menu)
 +		// This method has a side-effect that it also prevents binding multiple hotkeys to one virtual key if those keys are already bound to any of following.
 +
- 		List<string> list = new List<string> { "MouseLeft", "MouseRight", "Inventory" };
- 		foreach (InputMode value in Enum.GetValues(typeof(InputMode))) {
- 			if (value == InputMode.Mouse)
-@@ -1256,7 +_,7 @@
+ 		List<string> list = new List<string> {
+ 			"MouseLeft",
+ 			"MouseRight",
+@@ -1392,7 +_,10 @@
  				if (DpadSnapCooldown[i] == 0) {
  					int num = 6;
  					if (ItemSlot.IsABuildingItem(player.inventory[player.selectedItem]))
--						num = player.inventory[player.selectedItem].useTime;
++						/*
+ 						num = player.inventory[player.selectedItem].useTime;
++						*/
 +						num = CombinedHooks.TotalUseTime(player.inventory[player.selectedItem].useTime, player, player.inventory[player.selectedItem]);
  
  					DpadSnapCooldown[i] = num;
  					zero += vector;
-@@ -1501,6 +_,8 @@
+@@ -1645,6 +_,8 @@
  
  	public static void Reset(KeyConfiguration c, PresetProfiles style, InputMode mode)
  	{

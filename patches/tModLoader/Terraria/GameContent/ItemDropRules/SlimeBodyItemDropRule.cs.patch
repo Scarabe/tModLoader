@@ -4,9 +4,9 @@
  	{
  		int itemId = (int)info.npc.ai[1];
  		GetDropInfo(itemId, out var amountDroppedMinimum, out var amountDroppedMaximum);
--		CommonCode.DropItemFromNPC(info.npc, itemId, info.rng.Next(amountDroppedMinimum, amountDroppedMaximum + 1));
 +
 +		//TML: Changed call from DropItemFromNPC to just DropItem
+-		CommonCode.DropItemFromNPC(info.npc, itemId, info.rng.Next(amountDroppedMinimum, amountDroppedMaximum + 1));
 +		CommonCode.DropItem(info, itemId, info.rng.Next(amountDroppedMinimum, amountDroppedMaximum + 1));
 +
  		ItemDropAttemptResult result = default(ItemDropAttemptResult);

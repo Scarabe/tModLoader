@@ -1,6 +1,6 @@
 --- src/TerrariaNetCore/Terraria/GameContent/UI/BigProgressBar/BigProgressBarHelper.cs
 +++ src/tModLoader/Terraria/GameContent/UI/BigProgressBar/BigProgressBarHelper.cs
-@@ -1,5 +_,7 @@
+@@ -1,6 +_,8 @@
  using Microsoft.Xna.Framework;
  using Microsoft.Xna.Framework.Graphics;
  using ReLogic.Graphics;
@@ -8,6 +8,7 @@
 +using Terraria.ModLoader;
  
  namespace Terraria.GameContent.UI.BigProgressBar;
+ 
 @@ -24,6 +_,12 @@
  
  	public static void DrawFancyBar(SpriteBatch spriteBatch, float lifeAmount, float lifeMax, Texture2D barIconTexture, Rectangle barIconFrame)

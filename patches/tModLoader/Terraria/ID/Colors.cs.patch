@@ -2,8 +2,8 @@
 +++ src/tModLoader/Terraria/ID/Colors.cs
 @@ -2,7 +_,7 @@
  
- namespace Terraria.ID
- {
+ namespace Terraria.ID;
+ 
 -public static class Colors
 +public static partial class Colors
  {

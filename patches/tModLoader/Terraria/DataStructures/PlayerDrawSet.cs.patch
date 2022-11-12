@@ -17,10 +17,10 @@
  	public int projectileDrawPosition;
  	public Vector2 ItemLocation;
  	public int armorAdjust;
--	public bool missingHand;
--	public bool missingArm;
 +	// Renames for less confusion [
+-	public bool missingHand;
 +	public bool armorHidesHands;
+-	public bool missingArm;
 +	public bool armorHidesArms;
 +
 +	internal bool missingHand {

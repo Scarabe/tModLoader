@@ -3,8 +3,8 @@
 @@ -1,10 +_,12 @@
 +using Terraria.ModLoader;
 +
- namespace Terraria.ID
- {
+ namespace Terraria.ID;
+ 
 -public static class GoreID
 +public static partial class GoreID
  {

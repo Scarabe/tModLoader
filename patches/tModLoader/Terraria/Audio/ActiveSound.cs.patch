@@ -149,10 +149,10 @@
  
  		Vector2 value = Main.screenPosition + new Vector2(Main.screenWidth / 2, Main.screenHeight / 2);
  		float num = 1f;
--		if (!IsGlobal) {
--			float value2 = (Position.X - value.X) / ((float)Main.screenWidth * 0.5f);
 +		//if (!IsGlobal) {
+-		if (!IsGlobal) {
 +		if (Position.HasValue) {
+-			float value2 = (Position.X - value.X) / ((float)Main.screenWidth * 0.5f);
 +			float value2 = (Position.Value.X - value.X) / ((float)Main.screenWidth * 0.5f);
  			value2 = MathHelper.Clamp(value2, -1f, 1f);
  			Sound.Pan = value2;

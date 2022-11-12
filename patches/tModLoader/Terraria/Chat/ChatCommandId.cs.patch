@@ -1,6 +1,6 @@
 --- src/TerrariaNetCore/Terraria/Chat/ChatCommandId.cs
 +++ src/tModLoader/Terraria/Chat/ChatCommandId.cs
-@@ -7,8 +_,8 @@
+@@ -7,7 +_,7 @@
  
  public struct ChatCommandId
  {
@@ -9,4 +9,3 @@
  
  	private ChatCommandId(string name)
  	{
- 		_name = name;

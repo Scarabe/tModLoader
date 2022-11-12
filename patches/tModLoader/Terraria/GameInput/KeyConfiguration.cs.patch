@@ -9,8 +9,8 @@
  
  public class KeyConfiguration
  {
--	public Dictionary<string, List<string>> KeyStatus = new Dictionary<string, List<string>>();
 +	//TML: Made readonly so that dicts aren't set to null or whatever, .Clear() is allowed.
+-	public Dictionary<string, List<string>> KeyStatus = new Dictionary<string, List<string>>();
 +	public readonly Dictionary<string, List<string>> KeyStatus = new Dictionary<string, List<string>>();
 +	public readonly Dictionary<string, List<string>> UnloadedModKeyStatus = new Dictionary<string, List<string>>();
  
@@ -28,7 +28,7 @@
  	}
  
  	public void Processkey(TriggersSet set, string newKey, InputMode mode)
-@@ -47,24 +_,45 @@
+@@ -47,7 +_,10 @@
  
  	public void ReadPreferences(Dictionary<string, List<string>> dict)
  	{
@@ -39,7 +39,7 @@
  			if (!KeyStatus.ContainsKey(item.Key))
  				continue;
  
- 			KeyStatus[item.Key].Clear();
+@@ -55,16 +_,34 @@
  			foreach (string item2 in item.Value) {
  				KeyStatus[item.Key].Add(item2);
  			}
@@ -72,5 +72,5 @@
  		}
 +		*/
  
- 		if (!dictionary.ContainsKey("MouseLeft") || dictionary["MouseLeft"].Count == 0)
- 			dictionary["MouseLeft"] = new List<string> { "Mouse1" };
+ 		if (!dictionary.ContainsKey("MouseLeft") || dictionary["MouseLeft"].Count == 0) {
+ 			dictionary["MouseLeft"] = new List<string> {

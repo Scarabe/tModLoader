@@ -11,8 +11,8 @@
  
  	public void Reject(string assetPath, IRejectionReason reason)
  	{
--		_rejectedAssetsAndReasons.Add(assetPath, reason);
 +		lock (_rejectedAssetsAndReasons) {
+-		_rejectedAssetsAndReasons.Add(assetPath, reason);
 +			_rejectedAssetsAndReasons.Add(assetPath, reason);
 +		}
  	}
@@ -26,18 +26,18 @@
  
  	public void Clear()
  	{
--		_rejectedAssetsAndReasons.Clear();
 +		lock (_rejectedAssetsAndReasons) {
+-		_rejectedAssetsAndReasons.Clear();
 +			_rejectedAssetsAndReasons.Clear();
 +		}
  	}
  
  	public bool TryGetRejections(List<string> rejectionReasons)
  	{
--		foreach (KeyValuePair<string, IRejectionReason> rejectedAssetsAndReason in _rejectedAssetsAndReasons) {
--			rejectionReasons.Add(rejectedAssetsAndReason.Value.GetReason());
 +		lock (_rejectedAssetsAndReasons) {
+-		foreach (KeyValuePair<string, IRejectionReason> rejectedAssetsAndReason in _rejectedAssetsAndReasons) {
 +			foreach (KeyValuePair<string, IRejectionReason> rejectedAssetsAndReason in _rejectedAssetsAndReasons) {
+-			rejectionReasons.Add(rejectedAssetsAndReason.Value.GetReason());
 +				rejectionReasons.Add(rejectedAssetsAndReason.Value.GetReason());
 +			}
  		}

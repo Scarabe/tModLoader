@@ -23,11 +23,11 @@
  				return Lang.menu[163].Value;
 +			// Support for extra mouse buttons: [[
 +			case TriggerNames.MouseMiddle:
-+				return Language.GetTextValue($"tModLoader.{TriggerNames.MouseMiddle}"),
++				return Language.GetTextValue($"tModLoader.{TriggerNames.MouseMiddle}");
 +			case TriggerNames.MouseXButton1:
-+				return Language.GetTextValue($"tModLoader.{TriggerNames.MouseXButton1}"),
++				return Language.GetTextValue($"tModLoader.{TriggerNames.MouseXButton1}");
 +			case TriggerNames.MouseXButton2:
-+				return Language.GetTextValue($"tModLoader.{TriggerNames.MouseXButton2}"),
++				return Language.GetTextValue($"tModLoader.{TriggerNames.MouseXButton2}");
 +			// ]]
  			case "Up":
  				return Lang.menu[148].Value;

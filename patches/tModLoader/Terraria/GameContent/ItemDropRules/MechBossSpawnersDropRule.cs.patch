@@ -4,8 +4,8 @@
  	{
  		ItemDropAttemptResult result;
  		if (!NPC.downedMechBoss1 && info.player.RollLuck(2500) == 0) {
--			CommonCode.DropItemFromNPC(info.npc, 556, 1);
 +			//TML: Changed call from DropItemFromNPC to just DropItem
+-			CommonCode.DropItemFromNPC(info.npc, 556, 1);
 +			CommonCode.DropItem(info, 556, 1);
  			result = default(ItemDropAttemptResult);
  			result.State = ItemDropAttemptResultState.Success;
@@ -13,8 +13,8 @@
  		}
  
  		if (!NPC.downedMechBoss2 && info.player.RollLuck(2500) == 0) {
--			CommonCode.DropItemFromNPC(info.npc, 544, 1);
 +			//TML: Changed call from DropItemFromNPC to just DropItem
+-			CommonCode.DropItemFromNPC(info.npc, 544, 1);
 +			CommonCode.DropItem(info, 544, 1);
  			result = default(ItemDropAttemptResult);
  			result.State = ItemDropAttemptResultState.Success;
@@ -22,8 +22,8 @@
  		}
  
  		if (!NPC.downedMechBoss3 && info.player.RollLuck(2500) == 0) {
--			CommonCode.DropItemFromNPC(info.npc, 557, 1);
 +			//TML: Changed call from DropItemFromNPC to just DropItem
+-			CommonCode.DropItemFromNPC(info.npc, 557, 1);
 +			CommonCode.DropItem(info, 557, 1);
  			result = default(ItemDropAttemptResult);
  			result.State = ItemDropAttemptResultState.Success;

@@ -1,7 +1,6 @@
 --- src/TerrariaNetCore/Terraria/GameContent/DoorOpeningHelper.cs
 +++ src/tModLoader/Terraria/GameContent/DoorOpeningHelper.cs
-@@ -1,6 +_,8 @@
- using System;
+@@ -2,6 +_,8 @@
  using System.Collections.Generic;
  using Microsoft.Xna.Framework;
  using Terraria.GameInput;
@@ -9,6 +8,7 @@
 +using Terraria.ModLoader;
  
  namespace Terraria.GameContent;
+ 
 @@ -101,9 +_,11 @@
  
  		public DoorCloseAttemptResult TryCloseDoor(DoorOpenCloseTogglingInfo info, PlayerInfoForClosingDoors playerInfo)
@@ -28,10 +28,11 @@
  
 -		if (!_handlerByTileType.TryGetValue(tile.type, out infoProvider))
 -			return false;
+-
+-		return true;
 +		int type = tile.type;
 +		ModTile modTile = ModContent.GetModTile(type);
- 
--		return true;
++
 +		if (modTile != null && modTile.OpenDoorID > 0)
 +			type = TileID.ClosedDoor;
 +

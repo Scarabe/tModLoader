@@ -1,7 +1,6 @@
 --- src/TerrariaNetCore/Terraria/DataStructures/TileEntity.cs
 +++ src/tModLoader/Terraria/DataStructures/TileEntity.cs
-@@ -3,11 +_,12 @@
- using System.IO;
+@@ -4,10 +_,11 @@
  using Microsoft.Xna.Framework.Graphics;
  using Terraria.Audio;
  using Terraria.GameInput;
@@ -73,7 +72,6 @@
  
  		writer.Write(Position.X);
  		writer.Write(Position.Y);
--		WriteExtraData(writer, networkSend);
 +
 +		//Call NetSend instead of the vanilla method when in modded contexts.
 +		if (networkSend && !ModNet.AllowVanillaClients) {
@@ -82,6 +80,7 @@
 +			return;
 +		}
 +
+-		WriteExtraData(writer, networkSend);
 +		WriteExtraData(writer, lightSend);
  	}
  
@@ -93,7 +92,6 @@
  			ID = reader.ReadInt32();
  
  		Position = new Point16(reader.ReadInt16(), reader.ReadInt16());
--		ReadExtraData(reader, networkSend);
 +
 +		//Call NetReceive instead of the vanilla method when in modded contexts.
 +		if (networkSend && !ModNet.AllowVanillaClients) {
@@ -102,6 +100,7 @@
 +			return;
 +		}
 +
+-		ReadExtraData(reader, networkSend);
 +		ReadExtraData(reader, lightSend);
  	}
  

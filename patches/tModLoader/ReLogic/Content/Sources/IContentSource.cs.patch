@@ -29,11 +29,11 @@
 +	/// <returns>null if the asset does not exist</returns>
  	string GetExtension(string assetName);
  
--	Stream OpenStream(string assetName);
 +	//TML: Changed parameter name from 'assetName'.
 +	/// <summary>
 +	/// Must be threadsafe! 
 +	/// </summary>
+-	Stream OpenStream(string assetName);
 +	Stream OpenStream(string fullAssetName);
  
 +	/*

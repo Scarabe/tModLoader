@@ -11,8 +11,8 @@
 -public class ItemDropDatabase
 +public partial class ItemDropDatabase
  {
--	private List<IItemDropRule> _globalEntries = new List<IItemDropRule>();
 +	//TML: Made internal instead of private.
+-	private List<IItemDropRule> _globalEntries = new List<IItemDropRule>();
 +	internal List<IItemDropRule> _globalEntries = new List<IItemDropRule>();
  	private Dictionary<int, List<IItemDropRule>> _entriesByNpcNetId = new Dictionary<int, List<IItemDropRule>>();
  	private Dictionary<int, List<int>> _npcNetIdsByType = new Dictionary<int, List<int>>();
@@ -21,8 +21,8 @@
  		return entry;
  	}
  
--	private void RegisterToNPCNetId(int npcNetId, IItemDropRule entry)
 +	//TML: Publicized.
+-	private void RegisterToNPCNetId(int npcNetId, IItemDropRule entry)
 +	public void RegisterToNPCNetId(int npcNetId, IItemDropRule entry)
  	{
  		if (!_entriesByNpcNetId.ContainsKey(npcNetId))
@@ -31,8 +31,8 @@
  		return entry;
  	}
  
--	private void RemoveFromNPCNetId(int npcNetId, IItemDropRule entry)
 +	//TML: Publicized.
+-	private void RemoveFromNPCNetId(int npcNetId, IItemDropRule entry)
 +	public void RemoveFromNPCNetId(int npcNetId, IItemDropRule entry)
  	{
  		if (_entriesByNpcNetId.ContainsKey(npcNetId))

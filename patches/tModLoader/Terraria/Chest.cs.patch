@@ -85,7 +85,7 @@
  		switch (type2) {
  			case 21:
  				switch (num2) {
-@@ -379,6 +_,8 @@
+@@ -379,13 +_,19 @@
  				return false;
  		}
  
@@ -94,7 +94,6 @@
  		SoundEngine.PlaySound(22, X * 16, Y * 16);
  		for (int i = X; i <= X + 1; i++) {
  			for (int j = Y; j <= Y + 1; j++) {
-@@ -385,7 +_,11 @@
  				Tile tileSafely2 = Framing.GetTileSafely(i, j);
  				if (tileSafely2.type == type2) {
  					tileSafely2.frameX -= num;
@@ -135,12 +134,12 @@
  			}
  		}
  
-@@ -637,23 +_,38 @@
+@@ -637,13 +_,22 @@
  		}
  	}
  
--	public void AddItemToShop(Item newItem)
 +	//TML: Now returns the item's index.
+-	public void AddItemToShop(Item newItem)
 +	public int AddItemToShop(Item newItem)
  	{
  		int num = Main.shopSellbackHelper.Remove(newItem);
@@ -160,7 +159,7 @@
  			if (item[i] == null || item[i].type == 0) {
  				item[i] = newItem.Clone();
  				item[i].favorited = false;
- 				item[i].buyOnce = true;
+@@ -651,9 +_,15 @@
  				item[i].stack -= num;
  				_ = item[i].value;
  				_ = 0;

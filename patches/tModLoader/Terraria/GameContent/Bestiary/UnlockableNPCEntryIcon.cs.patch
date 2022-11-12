@@ -1,12 +1,13 @@
 --- src/TerrariaNetCore/Terraria/GameContent/Bestiary/UnlockableNPCEntryIcon.cs
 +++ src/tModLoader/Terraria/GameContent/Bestiary/UnlockableNPCEntryIcon.cs
-@@ -3,5 +_,6 @@
+@@ -3,6 +_,7 @@
  using ReLogic.Content;
  using Terraria.ID;
  using Terraria.Localization;
 +using Terraria.ModLoader;
  
  namespace Terraria.GameContent.Bestiary;
+ 
 @@ -60,7 +_,7 @@
  				positionOffsetCache.Y = value.PortraitPositionYOverride.Value;
  

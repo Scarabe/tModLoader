@@ -23,8 +23,7 @@
  	}
  
  	public void Update()
-@@ -145,7 +_,8 @@
- 
+@@ -146,6 +_,7 @@
  	private void AddNewTip(double currentTime)
  	{
  		string textKey = "UI.Back";

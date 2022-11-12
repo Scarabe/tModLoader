@@ -9,7 +9,7 @@
  {
  	public class StackedNPCProfile : ITownNPCProfile
  	{
-@@ -67,8 +_,8 @@
+@@ -67,7 +_,7 @@
  		}
  
  		public int RollVariation() => 0;
@@ -18,8 +18,7 @@
  
  		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc)
  		{
- 			if (npc.IsABestiaryIconDummy && !npc.ForcePartyHatOn)
-@@ -104,8 +_,8 @@
+@@ -104,7 +_,7 @@
  		}
  
  		public int RollVariation() => 0;
@@ -28,4 +27,3 @@
  
  		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc)
  		{
- 			if (npc.altTexture == 3 && _defaultCredits != null)

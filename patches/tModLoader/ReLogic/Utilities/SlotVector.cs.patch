@@ -10,8 +10,7 @@
  {
  	public sealed class Enumerator : IEnumerator<ItemPair>, IDisposable, IEnumerator
  	{
-@@ -166,8 +_,8 @@
- 	}
+@@ -167,7 +_,7 @@
  
  	public bool Has(int index)
  	{

@@ -35,8 +35,8 @@
  
  	public void ReportDroprates(List<DropRateInfo> drops, DropRateInfoChainFeed ratesInfo)
  	{
--		float num = 1f / (float)chanceDenominator;
 +		//TML: chanceNumerator inserted in place of '1.0'.
+-		float num = 1f / (float)chanceDenominator;
 +		float num = chanceNumerator / (float)chanceDenominator;
  		float num2 = num * ratesInfo.parentDroprateChance;
  		float multiplier = 1f / (float)options.Length * num2;

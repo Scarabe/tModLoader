@@ -1,11 +1,12 @@
 --- src/TerrariaNetCore/Terraria/Achievements/AchievementCondition.cs
 +++ src/tModLoader/Terraria/Achievements/AchievementCondition.cs
-@@ -1,4 +_,5 @@
+@@ -1,5 +_,6 @@
  using Newtonsoft.Json;
  using Newtonsoft.Json.Linq;
 +using Terraria.Social;
  
  namespace Terraria.Achievements;
+ 
 @@ -34,6 +_,10 @@
  
  	public virtual void Complete()

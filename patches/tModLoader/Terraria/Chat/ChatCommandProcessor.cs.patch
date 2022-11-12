@@ -1,15 +1,14 @@
 --- src/TerrariaNetCore/Terraria/Chat/ChatCommandProcessor.cs
 +++ src/tModLoader/Terraria/Chat/ChatCommandProcessor.cs
-@@ -2,6 +_,7 @@
- using System.Linq;
+@@ -3,6 +_,7 @@
  using ReLogic.Utilities;
  using Terraria.Chat.Commands;
  using Terraria.Localization;
 +using Terraria.ModLoader;
  
  namespace Terraria.Chat;
-@@ -106,7 +_,12 @@
- 	}
+ 
+@@ -107,6 +_,11 @@
  
  	public void ProcessIncomingMessage(ChatMessage message, int clientId)
  	{

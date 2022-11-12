@@ -12,8 +12,8 @@
  {
  	public const int POSITIVE_SACRIFICE_COUNT_CAP = 9999;
 -	private Dictionary<string, int> _sacrificeCountByItemPersistentId;
--	private Dictionary<int, int> _sacrificesCountByItemIdCache;
 +	internal Dictionary<string, int> _sacrificeCountByItemPersistentId;
+-	private Dictionary<int, int> _sacrificesCountByItemIdCache;
 +	internal Dictionary<int, int> _sacrificesCountByItemIdCache;
  
  	public int LastEditId { get; private set; }

@@ -6,8 +6,7 @@
  namespace Terraria.GameContent.ObjectInteractions;
  
  public class BlockBecauseYouAreOverAnImportantTile : ISmartInteractBlockReasonProvider
-@@ -5,7 +_,8 @@
- 	public bool ShouldBlockSmartInteract(SmartInteractScanSettings settings)
+@@ -6,6 +_,7 @@
  	{
  		int tileTargetX = Player.tileTargetX;
  		int tileTargetY = Player.tileTargetY;
@@ -15,7 +14,7 @@
  		if (!WorldGen.InWorld(tileTargetX, tileTargetY, 10))
  			return true;
  
-@@ -15,19 +_,24 @@
+@@ -15,12 +_,14 @@
  
  		if (tile.active()) {
  			switch (tile.type) {
@@ -30,7 +29,7 @@
  				case 471:
  				case 480:
  				case 509:
- 				case 520:
+@@ -28,6 +_,9 @@
  				case 657:
  				case 658:
  					return true;

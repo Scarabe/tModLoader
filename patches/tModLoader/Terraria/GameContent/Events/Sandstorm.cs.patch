@@ -37,9 +37,9 @@
  				int num = 21600;
  				num = ((!Main.hardMode) ? (num * 3) : (num * 2));
  				if (HasSufficientWind()) {
--					for (int i = 0; i < Main.dayRate; i++) {
 +					_timePass += Main.desiredWorldEventsUpdateRate;
 +
+-					for (int i = 0; i < Main.dayRate; i++) {
 +					for (int i = 1; i <= (int)_timePass; i++) {
  						if (Main.rand.Next(num) == 0)
  							StartSandstorm();
@@ -53,11 +53,11 @@
  			Severity = IntendedSeverity;
  	}
  
--	private static void StartSandstorm()
 +	//TML: Publicized, documented.
 +	/// <summary>
 +	/// Starts sandstorm for a random amount of time. Should be called on the server (netMode != client) - the method syncs it automatically.
 +	/// </summary>
+-	private static void StartSandstorm()
 +	public static void StartSandstorm()
  	{
  		Happening = true;
@@ -65,11 +65,11 @@
  		ChangeSeverityIntentions();
  	}
  
--	private static void StopSandstorm()
 +	//TML: Publicized, documented.
 +	/// <summary>
 +	/// Stops sandstorm. Should be called on the server (netMode != client) - the method syncs it automatically.
 +	/// </summary>
+-	private static void StopSandstorm()
 +	public static void StopSandstorm()
  	{
  		Happening = false;

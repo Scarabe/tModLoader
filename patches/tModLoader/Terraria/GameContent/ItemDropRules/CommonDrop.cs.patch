@@ -5,8 +5,7 @@
  using System.Collections.Generic;
  
  namespace Terraria.GameContent.ItemDropRules;
-@@ -13,7 +_,11 @@
- 	public List<IItemDropRuleChainAttempt> ChainedRules { get; private set; }
+@@ -14,6 +_,10 @@
  
  	public CommonDrop(int itemId, int chanceDenominator, int amountDroppedMinimum = 1, int amountDroppedMaximum = 1, int chanceNumerator = 1)
  	{

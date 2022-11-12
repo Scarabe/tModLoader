@@ -1,11 +1,12 @@
 --- src/TerrariaNetCore/Terraria/GameContent/PlayerHeadDrawRenderTargetContent.cs
 +++ src/tModLoader/Terraria/GameContent/PlayerHeadDrawRenderTargetContent.cs
-@@ -2,2 +_,3 @@
+@@ -1,4 +_,5 @@
+ using System.Collections.Generic;
 +using Microsoft.Xna.Framework;
  using Microsoft.Xna.Framework.Graphics;
  using Terraria.DataStructures;
-@@ -18,7 +_,8 @@
  
+@@ -19,6 +_,7 @@
  	internal override void DrawTheContent(SpriteBatch spriteBatch)
  	{
  		if (_player != null && !_player.ShouldNotDraw) {

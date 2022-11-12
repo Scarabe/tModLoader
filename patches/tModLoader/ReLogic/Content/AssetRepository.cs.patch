@@ -4,8 +4,8 @@
  
  namespace ReLogic.Content;
  
--public class AssetRepository : IAssetRepository, IDisposable
 +// See AssetRepository.TML.cs for most of the code and explanations.
+-public class AssetRepository : IAssetRepository, IDisposable
 +public partial class AssetRepository : IAssetRepository, IDisposable
  {
 +	/*
@@ -206,8 +206,8 @@
  		LoadAsset(asset2, mode);
  	}
  
--	private IContentSource FindSourceForAsset(string assetName) => _sources.FirstOrDefault((IContentSource source) => source.HasAsset(assetName)) ?? throw AssetLoadException.FromMissingAsset(assetName);
 +	//TML: Made protected instead of private.
+-	private IContentSource FindSourceForAsset(string assetName) => _sources.FirstOrDefault((IContentSource source) => source.HasAsset(assetName)) ?? throw AssetLoadException.FromMissingAsset(assetName);
 +	protected IContentSource FindSourceForAsset(string assetName) => _sources.FirstOrDefault((IContentSource source) => source.HasAsset(assetName)) ?? throw AssetLoadException.FromMissingAsset(assetName);
  
  	private void ThrowIfDisposed()

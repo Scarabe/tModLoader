@@ -10,11 +10,10 @@
  	public readonly Entity Entity;
  
 -	public EntitySource_Parent(Entity entity)
--	{
 +	public string? Context { get; }
 +
 +	public EntitySource_Parent(Entity entity, string? context = null)
-+	{
+ 	{
  		Entity = entity;
 +		Context = context;
  	}

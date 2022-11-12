@@ -1,7 +1,6 @@
 --- src/TerrariaNetCore/Terraria/GameContent/UI/IssueReportsIndicator.cs
 +++ src/tModLoader/Terraria/GameContent/UI/IssueReportsIndicator.cs
-@@ -17,8 +_,10 @@
- 	public void AttemptLettingPlayerKnow()
+@@ -18,7 +_,9 @@
  	{
  		Setup();
  		_shouldBeShowing = true;

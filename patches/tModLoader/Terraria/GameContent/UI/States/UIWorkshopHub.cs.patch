@@ -1,17 +1,19 @@
 --- src/TerrariaNetCore/Terraria/GameContent/UI/States/UIWorkshopHub.cs
 +++ src/tModLoader/Terraria/GameContent/UI/States/UIWorkshopHub.cs
-@@ -2,4 +_,5 @@
+@@ -1,6 +_,7 @@
+ using System;
  using Microsoft.Xna.Framework;
  using Microsoft.Xna.Framework.Graphics;
 +using ReLogic.Content;
  using Terraria.Audio;
  using Terraria.GameContent.UI.Elements;
+ using Terraria.ID;
 @@ -10,7 +_,7 @@
  
  namespace Terraria.GameContent.UI.States;
  
 -public class UIWorkshopHub : UIState, IHaveBackButtonCommand
-+public partial class UIWorkshopHub : UIState, IHaveBackButtonCommand
++public partial class UIWorkshopHub : UIState
  {
  	private UIState _previousUIState;
  	private UIText _descriptionText;
@@ -77,15 +79,16 @@
  		if (listeningElement == _buttonUseResourcePacks)
  			localizedText = Language.GetText("Workshop.HubDescriptionUseResourcePacks");
  
-@@ -233,17 +_,22 @@
+@@ -233,17 +_,23 @@
  
  	private UIElement MakeFancyButton(string iconImagePath, string textKey)
  	{
-+		return MakeFancyButtonInner(Main.Assets.Request<Texture2D>(iconImagePath), textKey);
++		return MakeFancyButton_Inner(Main.Assets.Request<Texture2D>(iconImagePath), textKey);
 +	}
 +
 +	//TML: A split from the above method.
-+	private UIElement MakeFancyButtonInner(Asset<Texture2D> iconImage, string textKey) {
++	private UIElement MakeFancyButton_Inner(Asset<Texture2D> iconImage, string textKey)
++	{
  		UIPanel uIPanel = new UIPanel();
  		int num = -3;
  		int num2 = -3;
@@ -102,8 +105,7 @@
  			IgnoresMouseInteraction = true,
  			VAlign = 0.5f
  		};
-@@ -314,14 +_,14 @@
- 	}
+@@ -315,13 +_,13 @@
  
  	public void HandleBackButtonUsage()
  	{

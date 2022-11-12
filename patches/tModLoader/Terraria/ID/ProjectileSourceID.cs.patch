@@ -5,15 +5,15 @@
 +
 +using System;
 +
- namespace Terraria.ID
- {
+ namespace Terraria.ID;
+ 
 +//TML: Internalized in favor of string contexts on every entity source.
 -public static class ProjectileSourceID
 +internal static class ProjectileSourceID
  {
  	public const int None = 0;
  	public const int SetBonus_SolarExplosion_WhenTakingDamage = 1;
-@@ -21,5 +_,26 @@
+@@ -21,4 +_,25 @@
  	public const int SetBonus_GhostHurt = 16;
  	public const int VampireKnives = 18;
  	public const int Count = 19;
@@ -38,5 +38,4 @@
 +		TorchGod => throw new ArgumentException($"Unexpected or invalid value: '{itemSourceId}'."), // Due to 'EntitySource_TorchGod' being added.
 +		_ => null,
 +	};
- }
  }

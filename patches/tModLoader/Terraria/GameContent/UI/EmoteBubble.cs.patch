@@ -15,11 +15,10 @@
  	public static Dictionary<int, EmoteBubble> byID = new Dictionary<int, EmoteBubble>();
  	private static List<int> toClean = new List<int>();
  	public static int NextID;
-@@ -64,14 +_,54 @@
+@@ -64,7 +_,24 @@
  			else if (anch.entity is Projectile)
  				item = 2;
  
--			return Tuple.Create(item, anch.entity.whoAmI);
 +			// TML: #WorldUIAnchorProjectileSyncFix: Explanation below
 +			// Vanilla never uses Projectile as a WorldUIAnchor, but if mods do, it is very likely to desync.
 +			// As whoAmI is not enough to match a projectile between sides, TML rewrites it to use identity + owner instead.
@@ -37,11 +36,12 @@
 +				}
 +			}
 +
+-			return Tuple.Create(item, anch.entity.whoAmI);
 +			return Tuple.Create(item, whoAmI);
  		}
  
  		return Tuple.Create(0, 0);
- 	}
+@@ -72,6 +_,29 @@
  
  	public static WorldUIAnchor DeserializeNetAnchor(int type, int meta)
  	{
@@ -71,8 +71,7 @@
  		switch (type) {
  			case 0:
  				return new WorldUIAnchor(Main.npc[meta]);
-@@ -368,8 +_,8 @@
- 	}
+@@ -369,7 +_,7 @@
  
  	private void ProbeTownNPCs(List<int> list)
  	{

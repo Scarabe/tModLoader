@@ -1,7 +1,6 @@
 --- src/TerrariaNetCore/ReLogic/Threading/FastParallel.cs
 +++ src/tModLoader/ReLogic/Threading/FastParallel.cs
-@@ -23,12 +_,25 @@
- 		}
+@@ -24,12 +_,25 @@
  
  		public void Invoke()
  		{
@@ -26,6 +25,7 @@
 +	private static bool skipPrioritySetAttempts; // Added by TML.
  
  	public static bool ForceTasksOnCallingThread { get; set; }
+ 
 @@ -49,7 +_,13 @@
  			num2 = 1;
  

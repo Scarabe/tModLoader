@@ -1,12 +1,13 @@
 --- src/TerrariaNetCore/Terraria/GameContent/SmartCursorHelper.cs
 +++ src/tModLoader/Terraria/GameContent/SmartCursorHelper.cs
-@@ -5,5 +_,6 @@
+@@ -5,6 +_,7 @@
  using Terraria.GameContent.UI;
  using Terraria.GameInput;
  using Terraria.ID;
 +using Terraria.ModLoader;
  
  namespace Terraria.GameContent;
+ 
 @@ -146,6 +_,7 @@
  		bool result = false;
  		if (Main.tile[providedInfo.screenTargetX, providedInfo.screenTargetY].active()) {

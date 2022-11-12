@@ -1,14 +1,13 @@
 --- src/TerrariaNetCore/Terraria/Audio/LegacyAudioSystem.cs
 +++ src/tModLoader/Terraria/Audio/LegacyAudioSystem.cs
-@@ -2,7 +_,8 @@
- using System.Collections;
- using System.Collections.Generic;
+@@ -4,6 +_,7 @@
  using System.IO;
  using Microsoft.Xna.Framework.Audio;
  using ReLogic.Content.Sources;
 +using Terraria.ModLoader.Engine;
  
  namespace Terraria.Audio;
+ 
 @@ -68,17 +_,19 @@
  
  #if !SERVER
@@ -32,8 +31,7 @@
  						break;
  				}
  
-@@ -99,11 +_,13 @@
- 	}
+@@ -100,10 +_,12 @@
  
  	public LegacyAudioSystem()
  	{

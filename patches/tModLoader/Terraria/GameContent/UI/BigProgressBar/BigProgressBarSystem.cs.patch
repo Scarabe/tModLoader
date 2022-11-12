@@ -1,6 +1,7 @@
 --- src/TerrariaNetCore/Terraria/GameContent/UI/BigProgressBar/BigProgressBarSystem.cs
 +++ src/tModLoader/Terraria/GameContent/UI/BigProgressBar/BigProgressBarSystem.cs
-@@ -3,9 +_,10 @@
+@@ -2,10 +_,11 @@
+ using Microsoft.Xna.Framework;
  using Microsoft.Xna.Framework.Graphics;
  using Terraria.IO;
 +using Terraria.ModLoader;
@@ -31,10 +32,10 @@
  
  	public void Draw(SpriteBatch spriteBatch)
  	{
--		if (_currentBar != null)
 +		if (BossBarLoader.CurrentStyle.PreventDraw)
 +			goto endDraw;
 +
+-		if (_currentBar != null)
 +		if (_currentBar != null) {
 +			BossBarLoader.drawingInfo = _info;
  			_currentBar.Draw(ref _info, spriteBatch);

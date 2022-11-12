@@ -1,6 +1,6 @@
 --- src/TerrariaNetCore/Terraria/GameContent/UI/ResourceSets/ClassicPlayerResourcesDisplaySet.cs
 +++ src/tModLoader/Terraria/GameContent/UI/ResourceSets/ClassicPlayerResourcesDisplaySet.cs
-@@ -2,12 +_,20 @@
+@@ -2,13 +_,21 @@
  using Microsoft.Xna.Framework.Graphics;
  using ReLogic.Graphics;
  using Terraria.DataStructures;
@@ -21,6 +21,7 @@
 +
  	private int UI_ScreenAnchorX;
  
+ 	public string NameKey { get; private set; }
 @@ -34,9 +_,25 @@
  		SpriteBatch spriteBatch = Main.spriteBatch;
  		Color color = new Color(Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor, Main.mouseTextColor);

@@ -1,10 +1,11 @@
 --- src/TerrariaNetCore/Terraria/GameContent/ObjectInteractions/NPCSmartInteractCandidateProvider.cs
 +++ src/tModLoader/Terraria/GameContent/ObjectInteractions/NPCSmartInteractCandidateProvider.cs
-@@ -1,3 +_,4 @@
+@@ -1,4 +_,5 @@
  using Microsoft.Xna.Framework;
 +using Terraria.ModLoader;
  
  namespace Terraria.GameContent.ObjectInteractions;
+ 
 @@ -44,7 +_,10 @@
  		float npcDistanceFromCursor = -1f;
  		for (int i = 0; i < 200; i++) {

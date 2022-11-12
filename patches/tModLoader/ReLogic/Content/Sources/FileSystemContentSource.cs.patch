@@ -4,8 +4,8 @@
  
  namespace ReLogic.Content.Sources;
  
--public class FileSystemContentSource : IContentSource
 +//TML: Now derives from ContentSource instead of IContentSource
+-public class FileSystemContentSource : IContentSource
 +public class FileSystemContentSource : ContentSource
  {
  	private readonly string _basePath;
@@ -38,8 +38,8 @@
  	}
 +	*/
  
--	public Stream OpenStream(string assetName)
 +	//TML: Changed to override.
+-	public Stream OpenStream(string assetName)
 +	public override Stream OpenStream(string assetName)
  	{
  		if (!_nameToAbsolutePath.TryGetValue(assetName, out var value))

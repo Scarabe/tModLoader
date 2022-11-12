@@ -10,11 +10,10 @@
  	public TileEntity TileEntity;
  
 -	public EntitySource_TileEntity(TileEntity tileEntity)
--	{
 +	public string? Context { get; }
 +
 +	public EntitySource_TileEntity(TileEntity tileEntity, string? context = null)
-+	{
+ 	{
  		TileEntity = tileEntity;
 +		Context = context;
  	}

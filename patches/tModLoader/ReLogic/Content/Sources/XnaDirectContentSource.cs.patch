@@ -8,8 +8,8 @@
  
  namespace ReLogic.Content.Sources;
  
--public class XnaDirectContentSource : IContentSource
 +//TML: Now derives from ContentSource instead of IContentSource
+-public class XnaDirectContentSource : IContentSource
 +public class XnaDirectContentSource : ContentSource
  {
  	private readonly string _rootDirectory;
@@ -44,8 +44,8 @@
  	public string GetExtension(string assetName) => ".xnb";
 +	*/
  
--	public Stream OpenStream(string assetName)
 +	//TML: Made this an override.
+-	public Stream OpenStream(string assetName)
 +	public override Stream OpenStream(string assetName)
  	{
 +		/*

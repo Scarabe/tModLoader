@@ -9,9 +9,8 @@
  {
 -	public EntitySource_Wiring(int tileCoordsX, int tileCoordsY)
 -		: base(tileCoordsX, tileCoordsY)
--	{
 +	public EntitySource_Wiring(int tileCoordsX, int tileCoordsY, string? context = null)
 +		: base(tileCoordsX, tileCoordsY, context)
-+	{
+ 	{
  	}
  }

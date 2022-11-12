@@ -1,33 +1,37 @@
 --- src/TerrariaNetCore/Terraria/Graphics/Light/LightingEngine.cs
 +++ src/tModLoader/Terraria/Graphics/Light/LightingEngine.cs
 @@ -3,6 +_,7 @@
- using System;
- using System.Collections.Generic;
  using System.Diagnostics;
+ using Microsoft.Xna.Framework;
+ using ReLogic.Threading;
 +using Terraria.ModLoader;
  
- namespace Terraria.Graphics.Light
- {
-@@ -161,6 +_,13 @@
+ namespace Terraria.Graphics.Light;
+ 
+@@ -171,6 +_,17 @@
  				break;
  		}
  
++		// TML code: [[
 +		float factor = 0.91f; // Taken from the constant at the start of the method.
 +		float throughWaterR = workingLightMap.LightDecayThroughWater.X;
 +		float throughWaterG = workingLightMap.LightDecayThroughWater.Y;
 +		float throughWaterB = workingLightMap.LightDecayThroughWater.Z;
++
 +		LoaderManager.Get<WaterStylesLoader>().LightColorMultiplier(Main.waterStyle, factor, ref throughWaterR, ref throughWaterG, ref throughWaterB);
++
 +		workingLightMap.LightDecayThroughWater = new Vector3(throughWaterR, throughWaterG, throughWaterB);
++		// ]]
 +
  		if (Main.player[Main.myPlayer].nightVision) {
  			workingLightMap.LightDecayThroughAir *= 1.03f;
  			workingLightMap.LightDecayThroughSolid *= 1.03f;
-@@ -183,6 +_,15 @@
+@@ -193,6 +_,15 @@
  
  		workingLightMap.LightDecayThroughAir *= Player.airLightDecay;
  		workingLightMap.LightDecayThroughSolid *= Player.solidLightDecay;
 +
-+		//TML: Shouldn't this just ref to LightMap values instead?
++		// Shouldn't this just ref to LightMap values instead?
 +		float throughAir = 1f;
 +		float throughSolid = 1f;
 +
@@ -37,4 +41,4 @@
 +		workingLightMap.LightDecayThroughSolid *= throughSolid;
  	}
  
- 	private void ApplyPerFrameLights() {
+ 	private void ApplyPerFrameLights()

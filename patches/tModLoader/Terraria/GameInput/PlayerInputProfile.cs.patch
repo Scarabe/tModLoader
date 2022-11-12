@@ -16,13 +16,18 @@
  {
  	public Dictionary<InputMode, KeyConfiguration> InputModes = new Dictionary<InputMode, KeyConfiguration> {
  		{ InputMode.Keyboard, new KeyConfiguration() },
-@@ -200,7 +_,8 @@
+@@ -205,9 +_,13 @@
+ 
  	public void CopyGameplaySettingsFrom(PlayerInputProfile profile, InputMode mode)
  	{
- 		string[] keysToCopy = new string[23] {
--			"MouseLeft", "MouseRight", "Up", "Down", "Left", "Right", "Jump", "Grapple", "SmartSelect", "SmartCursor",
-+			// Patch to be improved after decompiler reconfiguration.
-+			"MouseLeft", "MouseRight", TriggerNames.MouseMiddle, TriggerNames.MouseXButton1, TriggerNames.MouseXButton2, "Up", "Down", "Left", "Right", "Jump", "Grapple", "SmartSelect", "SmartCursor",
- 			"QuickMount", "QuickHeal", "QuickMana", "QuickBuff", "Throw", "Inventory", "ViewZoomIn", "ViewZoomOut", "Loadout1", "Loadout2",
- 			"Loadout3", "ToggleCreativeMenu", "ToggleCameraMode"
- 		};
+-		string[] keysToCopy = new string[23] {
++		string[] keysToCopy = new string[] {
+ 			"MouseLeft",
+ 			"MouseRight",
++			// Extra mouse buttons support
++			TriggerNames.MouseMiddle,
++			TriggerNames.MouseXButton1,
++			TriggerNames.MouseXButton2,
+ 			"Up",
+ 			"Down",
+ 			"Left",

@@ -26,11 +26,10 @@
  		_contentLoader = new ThreadLocal<InternalContentManager>(() => new InternalContentManager(services));
  	}
  
--	public T FromStream<T>(Stream stream) where T : class
 +	/*
-+	public T FromStream<T>(Stream stream) where T : class
+ 	public T FromStream<T>(Stream stream) where T : class
 +	*/
-+	public async ValueTask<T> FromStream<T>(Stream stream, MainThreadCreationContext mainThreadCtx) where T : class {
++	public async ValueTask<T> FromStream<T>(Stream stream, MainThreadCreationContext mainThreadCtx) where T : class
  	{
  		InternalContentManager value = _contentLoader.Value;
 +

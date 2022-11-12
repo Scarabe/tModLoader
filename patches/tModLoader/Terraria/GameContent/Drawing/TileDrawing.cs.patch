@@ -39,8 +39,8 @@
  		}
  	}
  
--	private void MakeExtraPreparations(Tile tile, int x, int y)
 +	//TML: Added tileStyle parameter.
+-	private void MakeExtraPreparations(Tile tile, int x, int y)
 +	private void MakeExtraPreparations(Tile tile, int x, int y, int tileStyle)
  	{
  		switch (tile.type) {
@@ -133,8 +133,8 @@
  		return true;
  	}
  
--	private Texture2D GetTileDrawTexture(Tile tile, int tileX, int tileY)
 +	//TML: Publicized.
+-	private Texture2D GetTileDrawTexture(Tile tile, int tileX, int tileY)
 +	public Texture2D GetTileDrawTexture(Tile tile, int tileX, int tileY)
  	{
  		Texture2D result = TextureAssets.Tile[tile.type].Value;
@@ -169,8 +169,8 @@
  		return result;
  	}
  
--	private Texture2D GetTileDrawTexture(Tile tile, int tileX, int tileY, int paintOverride)
 +	//TML: Publicized.
+-	private Texture2D GetTileDrawTexture(Tile tile, int tileX, int tileY, int paintOverride)
 +	public Texture2D GetTileDrawTexture(Tile tile, int tileX, int tileY, int paintOverride)
  	{
  		Texture2D result = TextureAssets.Tile[tile.type].Value;
@@ -262,8 +262,8 @@
  		return _tileSolid[typeCache];
  	}
  
--	private void GetTileOutlineInfo(int x, int y, ushort typeCache, ref Color tileLight, ref Texture2D highlightTexture, ref Color highlightColor)
 +	//TML: Publicized.
+-	private void GetTileOutlineInfo(int x, int y, ushort typeCache, ref Color tileLight, ref Texture2D highlightTexture, ref Color highlightColor)
 +	public void GetTileOutlineInfo(int x, int y, ushort typeCache, ref Color tileLight, ref Texture2D highlightTexture, ref Color highlightColor)
  	{
  		if (Main.InSmartCursorHighlightArea(x, y, out var actuallySelected)) {
@@ -272,8 +272,8 @@
  
  	private bool InAPlaceWithWind(int x, int y, int width, int height) => WorldGen.InAPlaceWithWind(x, y, width, height);
  
--	private void GetTileDrawData(int x, int y, Tile tileCache, ushort typeCache, ref short tileFrameX, ref short tileFrameY, out int tileWidth, out int tileHeight, out int tileTop, out int halfBrickHeight, out int addFrX, out int addFrY, out SpriteEffects tileSpriteEffect, out Texture2D glowTexture, out Rectangle glowSourceRect, out Color glowColor)
 +	//TML: Publicized.
+-	private void GetTileDrawData(int x, int y, Tile tileCache, ushort typeCache, ref short tileFrameX, ref short tileFrameY, out int tileWidth, out int tileHeight, out int tileTop, out int halfBrickHeight, out int addFrX, out int addFrY, out SpriteEffects tileSpriteEffect, out Texture2D glowTexture, out Rectangle glowSourceRect, out Color glowColor)
 +	public void GetTileDrawData(int x, int y, Tile tileCache, ushort typeCache, ref short tileFrameX, ref short tileFrameY, out int tileWidth, out int tileHeight, out int tileTop, out int halfBrickHeight, out int addFrX, out int addFrY, out SpriteEffects tileSpriteEffect, out Texture2D glowTexture, out Rectangle glowSourceRect, out Color glowColor)
  	{
  		tileTop = 0;
@@ -323,15 +323,15 @@
  		}
  	}
  
--	private void AddSpecialLegacyPoint(Point p)
 +	//TML: Publicized.
+-	private void AddSpecialLegacyPoint(Point p)
 +	public void AddSpecialLegacyPoint(Point p)
  	{
  		AddSpecialLegacyPoint(p.X, p.Y);
  	}
  
--	private void AddSpecialLegacyPoint(int x, int y)
 +	//TML: Publicized.
+-	private void AddSpecialLegacyPoint(int x, int y)
 +	public void AddSpecialLegacyPoint(int x, int y)
  	{
 +		// Protection against too many special tiles
@@ -345,7 +345,6 @@
  		}
  	}
  
--	private void EmitLivingTreeLeaf(int i, int j, int leafGoreType)
 +	//TML: Publicized, documented.
 +	/// <summary>
 +	/// Emits a single living tree leaf or other gore instance directly below the target tile.<br/>
@@ -355,6 +354,7 @@
 +	/// <param name="i">The X coordinate of the target tile.</param>
 +	/// <param name="j">The Y coordinate of the target tile.</param>
 +	/// <param name="leafGoreType">The numerical ID of the leaf or other gore instance that should be spawned.</param>
+-	private void EmitLivingTreeLeaf(int i, int j, int leafGoreType)
 +	public void EmitLivingTreeLeaf(int i, int j, int leafGoreType)
  	{
  		EmitLivingTreeLeaf_Below(i, j, leafGoreType);
@@ -362,7 +362,6 @@
  			EmitLivingTreeLeaf_Sideways(i, j, leafGoreType);
  	}
  
--	private void EmitLivingTreeLeaf_Below(int x, int y, int leafGoreType)
 +	//TML: Publicized, documented.
 +	/// <summary>
 +	/// Emits a single living tree leaf or other gore instance directly below the target tile.<br/>
@@ -370,6 +369,7 @@
 +	/// <param name="x">The X coordinate of the target tile.</param>
 +	/// <param name="y">The Y coordinate of the target tile.</param>
 +	/// <param name="leafGoreType">The numerical ID of the leaf or other gore instance that should be spawned.</param>
+-	private void EmitLivingTreeLeaf_Below(int x, int y, int leafGoreType)
 +	public void EmitLivingTreeLeaf_Below(int x, int y, int leafGoreType)
  	{
  		Tile tile = Main.tile[x, y + 1];
@@ -378,7 +378,6 @@
  		}
  	}
  
--	private void EmitLivingTreeLeaf_Sideways(int x, int y, int leafGoreType)
 +	//TML: Publicized, documented.
 +	/// <summary>
 +	/// Emits a single living tree leaf or other gore instance directly to the side of the target tile, dependent on wind direction.<br/>
@@ -386,6 +385,7 @@
 +	/// <param name="x">The X coordinate of the target tile.</param>
 +	/// <param name="y">The Y coordinate of the target tile.</param>
 +	/// <param name="leafGoreType">The numerical ID of the leaf or other gore instance that should be spawned.</param>
+-	private void EmitLivingTreeLeaf_Sideways(int x, int y, int leafGoreType)
 +	public void EmitLivingTreeLeaf_Sideways(int x, int y, int leafGoreType)
  	{
  		int num = 0;
@@ -403,7 +403,6 @@
  		_gore[num2].velocity *= 0f;
  	}
  
--	private float GetWindCycle(int x, int y, double windCounter)
 +	//TML: Publicized, documented.
 +	/// <summary>
 +	/// Fetches the degree to which wind would/should affect a tile at the given location.
@@ -415,6 +414,7 @@
 +	/// If <see cref="Main.SettingsEnabled_TilesSwayInWind"/> is false or the tile is below surface level, 0.<br/>
 +	/// Otherwise, returns a value from 0.08f to 0.18f.
 +	/// </returns>
+-	private float GetWindCycle(int x, int y, double windCounter)
 +	public float GetWindCycle(int x, int y, double windCounter)
  	{
  		if (!Main.SettingsEnabled_TilesSwayInWind)
@@ -423,7 +423,6 @@
  		return num2 * lerpValue;
  	}
  
--	private bool ShouldSwayInWind(int x, int y, Tile tileCache)
 +	//TML: Publicized, documented.
 +	/// <summary>
 +	/// Determines whether or not the tile at the given location should be able to sway in the wind.
@@ -440,6 +439,7 @@
 +	/// - if the tile is a Pink Prickly Pear on any vanilla cactus variant
 +	/// </returns>
 +	// TO-DO: add TileLoader hookset
+-	private bool ShouldSwayInWind(int x, int y, Tile tileCache)
 +	public bool ShouldSwayInWind(int x, int y, Tile tileCache)
  	{
  		if (!Main.SettingsEnabled_TilesSwayInWind)
@@ -483,7 +483,7 @@
  					int frameY2 = Main.tile[x, y].frameY;
  					byte tileColor4 = tile.color();
  					Texture2D treeTopTexture2 = GetTreeTopTexture(treeTextureIndex, palmTreeBiome, tileColor4);
-@@ -6203,17 +_,26 @@
+@@ -6203,8 +_,13 @@
  	private Texture2D GetTreeTopTexture(int treeTextureIndex, int treeTextureStyle, byte tileColor)
  	{
  		Texture2D texture2D = _paintSystem.TryGetTreeTopAndRequestIfNotReady(treeTextureIndex, treeTextureStyle, tileColor);
@@ -498,7 +498,7 @@
  
  		return texture2D;
  	}
- 
+@@ -6212,8 +_,12 @@
  	private Texture2D GetTreeBranchTexture(int treeTextureIndex, int treeTextureStyle, byte tileColor)
  	{
  		Texture2D texture2D = _paintSystem.TryGetTreeBranchAndRequestIfNotReady(treeTextureIndex, treeTextureStyle, tileColor);
@@ -512,8 +512,7 @@
  
  		return texture2D;
  	}
-@@ -6362,8 +_,8 @@
- 	}
+@@ -6363,7 +_,7 @@
  
  	private void DrawAnimatedTile_AdjustForVisionChangers(int i, int j, Tile tileCache, ushort typeCache, short tileFrameX, short tileFrameY, ref Color tileLight, bool canDoDust)
  	{
@@ -535,7 +534,6 @@
  		}
  	}
  
--	private float GetWindGridPush(int i, int j, int pushAnimationTimeTotal, float pushForcePerFrame)
 +	//TML: Publicized, documented.
 +	/// <summary>
 +	/// Determines how much wind should affect a theoretical tile at the target location on the current update tick.
@@ -547,6 +545,7 @@
 +	/// <returns>
 +	/// The degree to which wind should affect the theoretical target tile, represented as a float.
 +	/// </returns>
+-	private float GetWindGridPush(int i, int j, int pushAnimationTimeTotal, float pushForcePerFrame)
 +	public float GetWindGridPush(int i, int j, int pushAnimationTimeTotal, float pushForcePerFrame)
  	{
  		_windGrid.GetWindTime(i, j, pushAnimationTimeTotal, out var windTimeLeft, out var directionX, out var _);
@@ -555,7 +554,6 @@
  		}
  	}
  
--	private float GetWindGridPushComplex(int i, int j, int pushAnimationTimeTotal, float totalPushForce, int loops, bool flipDirectionPerLoop)
 +	//TML: Publicized, documented.
 +	/// <summary>
 +	/// Determines how much wind should affect a theoretical tile at the target location on the current update tick.<br/>
@@ -568,6 +566,7 @@
 +	/// <param name="loops"></param>
 +	/// <param name="flipDirectionPerLoop"></param>
 +	/// <returns></returns>
+-	private float GetWindGridPushComplex(int i, int j, int pushAnimationTimeTotal, float totalPushForce, int loops, bool flipDirectionPerLoop)
 +	public float GetWindGridPushComplex(int i, int j, int pushAnimationTimeTotal, float totalPushForce, int loops, bool flipDirectionPerLoop)
  	{
  		_windGrid.GetWindTime(i, j, pushAnimationTimeTotal, out var windTimeLeft, out var directionX, out var _);

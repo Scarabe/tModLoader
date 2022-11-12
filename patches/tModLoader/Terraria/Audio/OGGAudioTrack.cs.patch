@@ -6,8 +6,7 @@
  using System.Collections.Generic;
  using System.IO;
  using Microsoft.Xna.Framework.Audio;
-@@ -56,18 +_,36 @@
- 	}
+@@ -57,16 +_,34 @@
  
  	private void FindLoops()
  	{
@@ -42,4 +41,3 @@
  
  	public override void Dispose()
  	{
- 		_soundEffectInstance.Dispose();

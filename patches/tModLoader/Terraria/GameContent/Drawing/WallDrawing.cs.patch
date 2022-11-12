@@ -16,7 +16,7 @@
  	private TilePaintSystemV2 _paintSystem;
  	private bool _shouldShowInvisibleWalls;
  
-@@ -58,28 +_,32 @@
+@@ -58,6 +_,7 @@
  
  		int num5 = (int)((screenPosition.X - vector.X) / 16f - 1f);
  		int num6 = (int)((screenPosition.X + (float)screenWidth + vector.X) / 16f) + 2;
@@ -24,29 +24,16 @@
  		int num7 = (int)((screenPosition.Y - vector.Y) / 16f - 1f);
  		int num8 = (int)((screenPosition.Y + (float)screenHeight + vector.Y) / 16f) + 5;
  		int num9 = offScreenRange / 16;
- 		int num10 = offScreenRange / 16;
- 		if (num5 - num9 < 4)
- 			num5 = num9 + 4;
- 
- 		if (num6 + num9 > maxTilesX - 4)
- 			num6 = maxTilesX - num9 - 4;
- 
- 		if (num7 - num10 < 4)
- 			num7 = num10 + 4;
- 
- 		if (num8 + num10 > maxTilesY - 4)
- 			num8 = maxTilesY - num10 - 4;
- 
- 		VertexColors vertices = default(VertexColors);
+@@ -78,8 +_,11 @@
  		Rectangle value = new Rectangle(0, 0, 32, 32);
  		int underworldLayer = Main.UnderworldLayer;
  		Point screenOverdrawOffset = Main.GetScreenOverdrawOffset();
--		for (int i = num7 - num10 + screenOverdrawOffset.Y; i < num8 + num10 - screenOverdrawOffset.Y; i++) {
--			for (int j = num5 - num9 + screenOverdrawOffset.X; j < num6 + num9 - screenOverdrawOffset.X; j++) {
 +
 +		//TML: Swapped loop iteration order to improve memory access linearity.
 +		// Minor perf improvement, may cause slight visual discrepancies with tiles that overdraw
+-		for (int i = num7 - num10 + screenOverdrawOffset.Y; i < num8 + num10 - screenOverdrawOffset.Y; i++) {
 +		for (int j = num5 - num9 + screenOverdrawOffset.X; j < num6 + num9 - screenOverdrawOffset.X; j++) {
+-			for (int j = num5 - num9 + screenOverdrawOffset.X; j < num6 + num9 - screenOverdrawOffset.X; j++) {
 +			for (int i = num7 - num10 + screenOverdrawOffset.Y; i < num8 + num10 - screenOverdrawOffset.Y; i++) {
  				Tile tile = _tileArray[j, i];
  				if (tile == null) {

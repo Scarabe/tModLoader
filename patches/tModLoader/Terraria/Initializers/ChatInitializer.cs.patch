@@ -2,13 +2,13 @@
 +++ src/tModLoader/Terraria/Initializers/ChatInitializer.cs
 @@ -6,6 +_,7 @@
  
- namespace Terraria.Initializers
- {
-+// @todo: if need be, we can add register tag handlers here
+ namespace Terraria.Initializers;
+ 
++//TODO: if need be, we can add register tag handlers here
  public static class ChatInitializer
  {
- 	public static void Load() {
-@@ -24,10 +_,12 @@
+ 	public static void Load()
+@@ -25,10 +_,12 @@
  			"name"
  		});
  

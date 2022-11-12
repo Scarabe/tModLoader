@@ -9,8 +9,7 @@
  	private List<AmbienceSpawnInfo> _forcedSpawns = new List<AmbienceSpawnInfo>();
  
  	private static bool IsSunnyDay()
-@@ -86,8 +_,8 @@
- 	public void Update()
+@@ -87,7 +_,7 @@
  	{
  		SpawnForcedEntities();
  		if (_updatesUntilNextAttempt > 0) {

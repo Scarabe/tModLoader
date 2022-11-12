@@ -1,6 +1,6 @@
 --- src/TerrariaNetCore/Terraria/GameContent/Prefixes/PrefixLegacy.cs
 +++ src/tModLoader/Terraria/GameContent/Prefixes/PrefixLegacy.cs
-@@ -1,9 +_,10 @@
+@@ -1,10 +_,11 @@
  using Terraria.ID;
 +using Terraria.ModLoader;
  
@@ -12,6 +12,7 @@
 +	internal class Prefixes
  	{
  		public static int[] PrefixesForSwords = new int[40] {
+ 			1,
 @@ -197,7 +_,7 @@
  
  	public class ItemSets

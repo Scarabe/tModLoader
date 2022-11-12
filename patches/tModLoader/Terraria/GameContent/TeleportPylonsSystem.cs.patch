@@ -15,12 +15,12 @@
  	private List<TeleportPylonInfo> _pylonsOld = new List<TeleportPylonInfo>();
  	private int _cooldownForUpdatingPylonsList;
  	private const int CooldownTimePerPylonsListUpdate = int.MaxValue;
--	private SceneMetrics _sceneMetrics = new SceneMetrics();
 +	//TML: Made internal instead of private.
+-	private SceneMetrics _sceneMetrics = new SceneMetrics();
 +	internal SceneMetrics _sceneMetrics = new SceneMetrics();
  
--	public List<TeleportPylonInfo> Pylons => _pylons;
 +	//TML: Changed from List to IReadOnlyList.
+-	public List<TeleportPylonInfo> Pylons => _pylons;
 +	public IReadOnlyList<TeleportPylonInfo> Pylons => _pylons;
  
  	public void Update()
@@ -119,7 +119,7 @@
  			int num2 = 9;
  			int typeOfPylon = (int)info.TypeOfPylon;
  			int number = 0;
-@@ -185,19 +_,35 @@
+@@ -185,12 +_,26 @@
  		}
  	}
  
@@ -146,7 +146,7 @@
  
  		Point16 positionInTiles = info.PositionInTiles;
  		return DoesPositionHaveEnoughNPCs(necessaryNPCCount, positionInTiles);
- 	}
+@@ -198,6 +_,8 @@
  
  	public static bool DoesPositionHaveEnoughNPCs(int necessaryNPCCount, Point16 centerPoint)
  	{

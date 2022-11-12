@@ -1,12 +1,14 @@
 --- src/TerrariaNetCore/Terraria/GameContent/PlayerSleepingHelper.cs
 +++ src/tModLoader/Terraria/GameContent/PlayerSleepingHelper.cs
-@@ -2,4 +_,6 @@
+@@ -1,6 +_,8 @@
+ using System;
  using Microsoft.Xna.Framework;
 +using Terraria.DataStructures;
  using Terraria.ID;
 +using Terraria.ModLoader;
  
  namespace Terraria.GameContent;
+ 
 @@ -180,8 +_,25 @@
  				break;
  		}

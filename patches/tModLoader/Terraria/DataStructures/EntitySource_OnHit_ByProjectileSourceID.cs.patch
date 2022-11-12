@@ -3,9 +3,9 @@
 @@ -1,6 +_,8 @@
  namespace Terraria.DataStructures;
  
--public class EntitySource_OnHit_ByProjectileSourceID : AEntitySource_OnHit
 +//TML: Removed, see EntitySource_ByEntitySourceId.cs
 +/*
+-public class EntitySource_OnHit_ByProjectileSourceID : AEntitySource_OnHit
 +public class EntitySource_OnHit_ByProjectileSourceID : EntitySource_OnHit
  {
  	public readonly int SourceId;

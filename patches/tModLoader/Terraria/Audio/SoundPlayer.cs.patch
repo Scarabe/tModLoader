@@ -88,7 +88,7 @@
  	public SlotId PlayLooped(SoundStyle style, Vector2 position, ActiveSound.LoopedPlayCondition loopingCondition)
  	{
  		if (Main.dedServ || style == null || !style.IsTrackable)
-@@ -29,30 +_,42 @@
+@@ -29,23 +_,34 @@
  			return SlotId.Invalid;
  
  		ActiveSound value = new ActiveSound(style, position, loopingCondition);
@@ -124,7 +124,7 @@
  	public ActiveSound GetActiveSound(SlotId id)
  	{
  		if (!_trackedSounds.Has(id))
- 			return null;
+@@ -53,6 +_,7 @@
  
  		return _trackedSounds[id];
  	}

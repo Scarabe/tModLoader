@@ -19,7 +19,7 @@
  	}
  
  	public void StartWorld()
-@@ -31,14 +_,15 @@
+@@ -31,6 +_,7 @@
  		if (Main.netMode != 1) {
  			_canSpawnFairies = true;
  			_delayUntilNextAttempt = 0;
@@ -27,7 +27,7 @@
  			ScanWholeOverworldForLogs();
  		}
  	}
- 
+@@ -38,7 +_,7 @@
  	public void UpdateTime()
  	{
  		if (Main.netMode != 1 && _canSpawnFairies && IsAGoodTime()) {
@@ -40,10 +40,10 @@
  
  		int oneOverSpawnChance = GetOneOverSpawnChance();
  		bool flag = false;
--		for (int i = 0; i < Main.dayRate; i++) {
 +
 +		_timePass += Main.desiredWorldEventsUpdateRate;
 +
+-		for (int i = 0; i < Main.dayRate; i++) {
 +		for (int i = 1; i <= (int)_timePass; i++) {
  			if (Main.rand.Next(oneOverSpawnChance) == 0) {
  				flag = true;

@@ -1,12 +1,13 @@
 --- src/TerrariaNetCore/Terraria/GameContent/ObjectInteractions/TileSmartInteractCandidateProvider.cs
 +++ src/tModLoader/Terraria/GameContent/ObjectInteractions/TileSmartInteractCandidateProvider.cs
-@@ -1,5 +_,6 @@
+@@ -1,6 +_,7 @@
  using System;
  using System.Collections.Generic;
  using Microsoft.Xna.Framework;
 +using Terraria.ModLoader;
  
  namespace Terraria.GameContent.ObjectInteractions;
+ 
 @@ -221,12 +_,15 @@
  					num7 = 3;
  					num8 = 4;

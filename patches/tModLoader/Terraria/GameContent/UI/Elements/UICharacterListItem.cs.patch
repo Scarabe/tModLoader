@@ -11,8 +11,8 @@
  
  namespace Terraria.GameContent.UI.Elements;
  
--public class UICharacterListItem : UIPanel
 +// See UICharacterListItem.TML.cs too.
+-public class UICharacterListItem : UIPanel
 +public partial class UICharacterListItem : UIPanel
  {
  	private PlayerFileData _data;

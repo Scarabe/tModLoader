@@ -4,8 +4,8 @@
  	{
  		ItemDropAttemptResult result;
  		if (info.rng.Next(chanceDenominator) < chanceNumerator) {
--			CommonCode.DropItemFromNPC(info.npc, dropIds[info.rng.Next(dropIds.Length)], 1);
 +			//TML: Changed call from DropItemFromNPC to just DropItem
+-			CommonCode.DropItemFromNPC(info.npc, dropIds[info.rng.Next(dropIds.Length)], 1);
 +			CommonCode.DropItem(info, dropIds[info.rng.Next(dropIds.Length)], 1);
 +
  			result = default(ItemDropAttemptResult);

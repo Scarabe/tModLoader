@@ -1,6 +1,6 @@
 --- src/TerrariaNetCore/Terraria/GameContent/Biomes/CaveHouse/HouseUtils.cs
 +++ src/tModLoader/Terraria/GameContent/Biomes/CaveHouse/HouseUtils.cs
-@@ -8,9 +_,9 @@
+@@ -8,8 +_,8 @@
  
  public static class HouseUtils
  {
@@ -11,4 +11,3 @@
  
  	public static HouseBuilder CreateBuilder(Point origin, StructureMap structures)
  	{
- 		List<Rectangle> list = CreateRooms(origin);

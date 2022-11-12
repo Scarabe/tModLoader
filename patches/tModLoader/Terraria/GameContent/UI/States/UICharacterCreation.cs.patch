@@ -8,7 +8,7 @@
  using Terraria.UI;
  using Terraria.UI.Gamepad;
  
-@@ -1105,8 +_,15 @@
+@@ -1116,8 +_,15 @@
  		int num = 0;
  		byte difficulty = _player.difficulty;
  		if (difficulty == 3) {
@@ -24,7 +24,7 @@
  			_player.inventory[num].SetDefaults(6);
  			_player.inventory[num++].Prefix(-1);
  			_player.inventory[num].SetDefaults(1);
-@@ -1144,6 +_,11 @@
+@@ -1155,6 +_,11 @@
  
  		_player.savedPerPlayerFieldsThatArentInThePlayerClass = new Player.SavedPlayerDataWithAnnoyingRules();
  		CreativePowerManager.Instance.ResetDataForNewPlayer(_player);

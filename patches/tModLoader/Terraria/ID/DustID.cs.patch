@@ -1,8 +1,8 @@
 --- src/TerrariaNetCore/Terraria/ID/DustID.cs
 +++ src/tModLoader/Terraria/ID/DustID.cs
 @@ -1,6 +_,6 @@
- namespace Terraria.ID
- {
+ namespace Terraria.ID;
+ 
 -public static class DustID
 +public static partial class DustID
  {

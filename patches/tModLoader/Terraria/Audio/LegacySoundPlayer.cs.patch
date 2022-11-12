@@ -19,8 +19,7 @@
  	public Asset<SoundEffect>[] SoundNpcKilled = new Asset<SoundEffect>[SoundID.NPCDeathCount];
  	public SoundEffectInstance[] SoundInstanceNpcKilled = new SoundEffectInstance[SoundID.NPCDeathCount];
  	public SoundEffectInstance SoundInstanceMoonlordCry;
-@@ -98,7 +_,8 @@
- 	}
+@@ -99,6 +_,7 @@
  
  	private void LoadAll()
  	{

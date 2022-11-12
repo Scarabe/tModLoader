@@ -1,6 +1,6 @@
 --- src/TerrariaNetCore/Terraria/GameContent/UI/ResourceSets/HorizontalBarsPlayerResourcesDisplaySet.cs
 +++ src/tModLoader/Terraria/GameContent/UI/ResourceSets/HorizontalBarsPlayerResourcesDisplaySet.cs
-@@ -3,5 +_,7 @@
+@@ -3,6 +_,8 @@
  using ReLogic.Content;
  using ReLogic.Graphics;
  using Terraria.DataStructures;
@@ -8,6 +8,7 @@
 +using Terraria.ModLoader;
  
  namespace Terraria.GameContent.UI.ResourceSets;
+ 
 @@ -25,6 +_,9 @@
  	private Asset<Texture2D> _panelRightHP;
  	private Asset<Texture2D> _panelMiddleMP;

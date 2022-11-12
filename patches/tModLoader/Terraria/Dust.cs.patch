@@ -1,6 +1,7 @@
 --- src/TerrariaNetCore/Terraria/Dust.cs
 +++ src/tModLoader/Terraria/Dust.cs
-@@ -2,7 +_,10 @@
+@@ -1,9 +_,12 @@
+ using System;
  using Microsoft.Xna.Framework;
 +using Terraria.DataStructures;
  using Terraria.GameContent;
@@ -11,6 +12,7 @@
 +using Terraria.ModLoader;
  
  namespace Terraria;
+ 
 @@ -29,6 +_,9 @@
  	public ArmorShaderData shader;
  	public object customData;
@@ -81,8 +83,7 @@
  			}
  			else {
  				dust.active = false;
-@@ -1897,7 +_,15 @@
- 	}
+@@ -1898,6 +_,14 @@
  
  	public Color GetAlpha(Color newColor)
  	{

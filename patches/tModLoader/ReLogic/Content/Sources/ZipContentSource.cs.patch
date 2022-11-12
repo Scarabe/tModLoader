@@ -4,8 +4,8 @@
  
  namespace ReLogic.Content.Sources;
  
--public class ZipContentSource : IContentSource, IDisposable
 +//TML: Now derives from ContentSource instead of IContentSource
+-public class ZipContentSource : IContentSource, IDisposable
 +public class ZipContentSource : ContentSource, IDisposable
  {
  	private readonly ZipFile _zipFile;
@@ -58,10 +58,10 @@
  			throw AssetLoadException.FromMissingAsset(assetName);
  
  		MemoryStream memoryStream = new MemoryStream((int)value.UncompressedSize);
--		value.Extract(memoryStream);
 +
 +		//TML: Wrapped call in this lock.
 +		lock (_zipFile) {
+-		value.Extract(memoryStream);
 +			value.Extract(memoryStream);
 +		}
 +
@@ -69,8 +69,8 @@
  		return memoryStream;
  	}
  
--	private void BuildExtensionFreeEntryList()
 +	//TML: Renamed from BuildExtensionFreeEntryList()
+-	private void BuildExtensionFreeEntryList()
 +	private void BuildEntryList()
  	{
  		_entries.Clear();

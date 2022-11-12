@@ -441,7 +441,8 @@ namespace Terraria
 			return this;
 		}
 
-		public static Recipe Create(int result, int amount = 1) {
+		public static Recipe Create(int result, int amount = 1)
+		{
 			if (!RecipeLoader.setupRecipes)
 				throw new RecipeException("A Recipe can only be created inside recipe related methods");
 

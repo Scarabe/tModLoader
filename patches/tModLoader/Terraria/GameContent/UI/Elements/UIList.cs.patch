@@ -13,12 +13,12 @@
  		public override Rectangle GetViewCullingArea() => base.Parent.GetDimensions().ToRectangle();
  	}
  
--	protected List<UIElement> _items = new List<UIElement>();
 +	//TML: Made public instead of protected.
+-	protected List<UIElement> _items = new List<UIElement>();
 +	public List<UIElement> _items = new List<UIElement>();
  	protected UIScrollbar _scrollbar;
--	private UIElement _innerList = new UIInnerList();
 +	//TML: Made internal instead of private.
+-	private UIElement _innerList = new UIInnerList();
 +	internal UIElement _innerList = new UIInnerList();
  	private float _innerListHeight;
  	public float ListPadding = 5f;

@@ -4,8 +4,8 @@
  
  namespace Terraria.GameContent.UI.BigProgressBar;
  
--internal interface IBigProgressBar
 +//TML: Made public.
+-internal interface IBigProgressBar
 +public interface IBigProgressBar
  {
  	bool ValidateAndCollectNecessaryInfo(ref BigProgressBarInfo info);

@@ -22,8 +22,7 @@
  	}
  
  	public static void Load(IServiceProvider services)
-@@ -28,7 +_,16 @@
- 	}
+@@ -29,6 +_,15 @@
  
  	public static void Update()
  	{
@@ -39,7 +38,7 @@
  		if (IsAudioSupported) {
  			if (Main.audioSystem != null)
  				Main.audioSystem.UpdateAudioEngine();
-@@ -56,7 +_,9 @@
+@@ -56,6 +_,8 @@
  		}
  	}
  
@@ -48,7 +47,6 @@
  	public static void PlaySound(int type, Vector2 position, int style = 1)
  	{
  		PlaySound(type, (int)position.X, (int)position.Y, style);
- 	}
 @@ -87,12 +_,12 @@
  		return SoundPlayer.GetActiveSound(id);
  	}
@@ -64,7 +62,7 @@
  	}
  
  	public static SlotId PlayTrackedLoopedSound(SoundStyle style, Vector2 position, ActiveSound.LoopedPlayCondition loopingCondition = null)
-@@ -110,28 +_,32 @@
+@@ -110,6 +_,7 @@
  
  		return SoundPlayer.Play(style);
  	}
@@ -72,7 +70,7 @@
  
  	public static void StopTrackedSounds()
  	{
- 		if (!Main.dedServ && IsAudioSupported)
+@@ -117,6 +_,8 @@
  			SoundPlayer.StopAll();
  	}
  
@@ -81,7 +79,7 @@
  	public static SoundEffect GetTrackableSoundByStyleId(int id)
  	{
  		if (Main.dedServ || !IsAudioSupported)
- 			return null;
+@@ -124,6 +_,7 @@
  
  		return LegacySoundPlayer.GetTrackableSoundByStyleId(id);
  	}
@@ -89,7 +87,7 @@
  
  	public static void StopAmbientSounds()
  	{
- 		if (!Main.dedServ && IsAudioSupported && LegacySoundPlayer != null)
+@@ -131,7 +_,7 @@
  			LegacySoundPlayer.StopAmbientSounds();
  	}
  

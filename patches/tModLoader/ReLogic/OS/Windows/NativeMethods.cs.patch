@@ -5,7 +5,7 @@
  namespace ReLogic.OS.Windows;
  
 -internal static class NativeMethods
-+internal partial static class NativeMethods
++internal static partial class NativeMethods
  {
  	public delegate IntPtr WndProcCallback(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
  

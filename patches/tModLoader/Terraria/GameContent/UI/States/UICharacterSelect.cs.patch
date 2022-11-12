@@ -1,6 +1,6 @@
 --- src/TerrariaNetCore/Terraria/GameContent/UI/States/UICharacterSelect.cs
 +++ src/tModLoader/Terraria/GameContent/UI/States/UICharacterSelect.cs
-@@ -1,22 +_,27 @@
+@@ -1,6 +_,8 @@
  using System;
  using System.Collections.Generic;
 +using System.IO;
@@ -9,8 +9,7 @@
  using Microsoft.Xna.Framework;
  using Microsoft.Xna.Framework.Graphics;
  using Terraria.Audio;
- using Terraria.GameContent.UI.Elements;
- using Terraria.GameInput;
+@@ -9,14 +_,17 @@
  using Terraria.ID;
  using Terraria.IO;
  using Terraria.Localization;
