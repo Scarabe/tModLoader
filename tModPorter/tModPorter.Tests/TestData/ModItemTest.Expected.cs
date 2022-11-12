@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.IO;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -48,9 +49,21 @@ public class ModItemTest : ModItem
 	public override void ModifyWeaponCrit(Player player, ref float crit) { /* Empty */ }
 
 	public override void ModifyWeaponDamage(Player player, ref StatModifier damage) {
+		// not-yet-implemented
 		damage += 0.1f;
 		damage *= 0.2f;
 		damage.Flat += 4;
+		// instead-expect
+#if COMPILE_ERROR
+		add += 0.1f;
+		mult *= 0.2f;
+		flat += 4;
+#endif
+	}
+
+	public override void OnCreated(ItemCreationContext context) {
+		if (context is RecipeItemCreationContext) { }
+		else if (context is InitializationItemCreationContext) { }
 	}
 
 #if COMPILE_ERROR
@@ -70,4 +83,6 @@ public class ModItemTest : ModItem
 #if COMPILE_ERROR
 	public override void SaveData(TagCompound tag)/* tModPorter Suggestion: Edit tag parameter instead of returning new TagCompound */ => new TagCompound();
 #endif
+
+	public override void ExtractinatorUse(int extractinatorBlockType, ref int resultType, ref int resultStack) { /* Empty */ }
 }

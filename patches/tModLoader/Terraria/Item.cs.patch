@@ -462,11 +462,15 @@
  	}
  
  	public bool Prefix(int prefixWeWant)
-@@ -304,7 +_,16 @@
+@@ -304,7 +_,20 @@
  		if (!CanHavePrefixes())
  			return false;
  
 +		if (prefixWeWant > 0 && !CanApplyPrefix(prefixWeWant))
++			return false;
++
++		//TML: #StackablePrefixWeapons: Stackable items will not spawn with a prefix on craft/generate. Only when deliberately reforged.
++		if (prefixWeWant == -1 && maxStack > 1)
 +			return false;
 +
  		UnifiedRandom unifiedRandom = (WorldGen.gen ? WorldGen.genRand : Main.rand);
@@ -823,7 +827,7 @@
  
 +	/// <summary>
 +	/// This method sets a variety of common Item values common to placeable walls.<br/>
-+	/// Specifically: useStyle = 1;	useTurn = true;	useAnimation = 15; useTime = 7; autoReuse = true; maxStack = 999; consumable = true; createWall = wallToPlace; width = 12; height = 12;<br/>
++	/// Specifically: useStyle = 1; useTurn = true; useAnimation = 15; useTime = 7; autoReuse = true; maxStack = CommonMaxStack; consumable = true; createWall = wallToPlace; width = 12; height = 12;<br/>
 +	/// </summary>
 +	/// <param name="wallToPlace"></param>
  	public void DefaultToPlaceableWall(ushort wallToPlace)
@@ -944,7 +948,7 @@
  		if (hairDye != 0)
  			hairDye = GameShaders.Hair.GetShaderIdFromItemId(type);
  
-@@ -47277,18 +_,22 @@
+@@ -47277,11 +_,14 @@
  			maxStack = CommonMaxStack;
  
  		netID = type;
@@ -960,15 +964,15 @@
  			netID = 0;
  			type = 0;
  			stack = 0;
- 		}
- 	}
+@@ -47290,6 +_,8 @@
  
--	public void OnCreated(ItemCreationContext context)
-+	//TODO: This is a temporary patch, Terraria.ModLoader.ItemCreationContext needs to be merged into the new vanilla type.
-+	public void OnCreated(Terraria.DataStructures.ItemCreationContext context)
+ 	public void OnCreated(ItemCreationContext context)
  	{
++		ItemLoader.OnCreated(this, context);
++
  		if (type == 5437)
  			SetDefaults(5358);
+ 	}
 @@ -47298,14 +_,30 @@
  	{
  		tooltipContext = -1;

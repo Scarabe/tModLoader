@@ -425,21 +425,26 @@
  			case 25:
  			case 27:
  			case 33:
-@@ -1051,6 +_,13 @@
- 			if (!Main.mouseRight)
- 				return;
- 
-+			if (context == Context.InventoryItem && ItemLoader.CanRightClick(inv[slot])) {
-+				if (Main.mouseRightRelease)
-+					ItemLoader.RightClick(inv[slot], player);
-+
-+				return;
-+			}
-+
+@@ -1054,16 +_,21 @@
  			if (context == 0 && Main.mouseRightRelease)
  				TryItemSwap(inv[slot]);
  
-@@ -1064,6 +_,7 @@
+-			if (context == 0 && ItemID.Sets.OpenableBag[inv[slot].type]) {
+-				if (Main.mouseRightRelease)
+-					TryOpenContainer(inv[slot], player);
++			if (context == 0 && ItemLoader.CanRightClick(inv[slot])) {
++				if (Main.mouseRightRelease) {
++					if (Main.ItemDropsDB.GetRulesForItemID(inv[slot].type).Any())
++						TryOpenContainer(inv[slot], player);
++					else
++						ItemLoader.RightClick(inv[slot], player);
++				}
+ 
+-				return;
+-			}
++ 				return;
++ 			}
+ 
  			switch (context) {
  				case 9:
  				case 11:
@@ -506,12 +511,26 @@
  
  		if (inv[slot].stack <= 0)
  			inv[slot] = new Item();
-@@ -1213,7 +_,11 @@
+@@ -1206,14 +_,24 @@
+ 		else if (item.type == 1869) {
+ 			player.OpenPresent(1869);
+ 		}
++		/*
+ 		else {
+ 			if (item.type != 599 && item.type != 600 && item.type != 601)
+ 				return;
+-
++		*/
++		else if (item.type == 599 && item.type == 600 && item.type == 601) {
  			player.OpenLegacyPresent(item.type);
  		}
- 
-+		ItemLoader.RightClickCallHooks(item, player);
++		// Added by TML.
++		else {
++			player.DropFromItem(item.type);
++		}
 +
++		ItemLoader.RightClickCallHooks(item, player);
+ 
 +		if (ItemLoader.ConsumeItem(item, player))
 -		item.stack--;
 +			item.stack--;

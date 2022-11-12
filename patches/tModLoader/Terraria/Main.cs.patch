@@ -3953,16 +3953,8 @@
 +
 +		Item crafted = r.createItem.Clone();
 +
-+		// TML: #StackablePrefixWeapons: Gameplay impact: stackable items will not get a prefix on craft
-+		if (crafted.maxStack == 1)
-+			crafted.Prefix(-1);
- 
- 		mouseItem.position.X = player[myPlayer].position.X + (float)(player[myPlayer].width / 2) - (float)(mouseItem.width / 2);
- 		mouseItem.position.Y = player[myPlayer].position.Y + (float)(player[myPlayer].height / 2) - (float)(mouseItem.height / 2);
- 		PopupText.NewText(PopupTextContext.ItemCraft, mouseItem, r.createItem.stack);
- 		r.Create();
-+
-+		crafted.OnCreated(new RecipeItemCreationContext(r));
++		crafted.Prefix(-1);
++		r.Create();
 +		RecipeLoader.OnCraft(crafted, r, mouseItem);
 +
 +		if (mouseItem.stack > 0) {
@@ -3971,6 +3963,14 @@
 +		else {
 +			mouseItem = crafted;
 +		}
+ 
+ 		mouseItem.position.X = player[myPlayer].position.X + (float)(player[myPlayer].width / 2) - (float)(mouseItem.width / 2);
+ 		mouseItem.position.Y = player[myPlayer].position.Y + (float)(player[myPlayer].height / 2) - (float)(mouseItem.height / 2);
+ 		PopupText.NewText(PopupTextContext.ItemCraft, mouseItem, r.createItem.stack);
++
++		/*
+ 		r.Create();
++		*/
 +
  		if (mouseItem.type > 0 || r.createItem.type > 0)
  			SoundEngine.PlaySound(7);

@@ -1,6 +1,9 @@
-﻿using Terraria.ID;
+﻿using Terraria;
+using Terraria.ID;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
+using ExampleMod.Content.Items.Weapons;
+using Terraria.GameContent;
 
 namespace ExampleMod.Content.Items.Placeable
 {
@@ -9,12 +12,15 @@ namespace ExampleMod.Content.Items.Placeable
 		public override void SetStaticDefaults() {
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
 			ItemID.Sets.SortingPriorityMaterials[Item.type] = 59; // Influences the inventory sort order. 59 is PlatinumBar, higher is more valuable.
+
+			// The Chlorophyte Extractinator can exchange items. Here we tell it to allow a one-way exchanging of 5 ExampleBar for 2 ChlorophyteBar.
+			ItemTrader.ChlorophyteExtractinator.AddOption_OneWay(Type, 5, ItemID.ChlorophyteBar, 2);
 		}
 
 		public override void SetDefaults() {
 			Item.width = 20;
 			Item.height = 20;
-			Item.maxStack = 99;
+			Item.maxStack = Item.CommonMaxStack;
 			Item.value = 750; // The cost of the item in copper coins. (1 = 1 copper, 100 = 1 silver, 1000 = 1 gold, 10000 = 1 platinum)
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.useTurn = true;

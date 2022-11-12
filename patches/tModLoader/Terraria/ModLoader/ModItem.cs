@@ -81,7 +81,7 @@ namespace Terraria.ModLoader
 				}
 			}
 
-			OnCreate(new InitializationContext());
+			OnCreated(new InitializationItemCreationContext());
 		}
 
 		public sealed override void SetupContent() {
@@ -104,7 +104,7 @@ namespace Terraria.ModLoader
 		public virtual void OnSpawn(IEntitySource source) {
 		}
 
-		public virtual void OnCreate(ItemCreationContext context) {
+		public virtual void OnCreated(ItemCreationContext context) {
 		}
 
 		/// <summary>
@@ -772,10 +772,6 @@ namespace Terraria.ModLoader
 		/// <param name="player">The player.</param>
 		public virtual void RightClick(Player player) {
 		}
-		
-		[Obsolete("Use ModifyItemLoot instead", true)]
-		public virtual void OpenBossBag(Player player) {
-		}
 
 		/// <summary>
 		/// Allows you to add and modify the loot items that spawn from bag items when opened.
@@ -1067,11 +1063,18 @@ namespace Terraria.ModLoader
 		}
 
 		/// <summary>
-		/// Allows you to modify what item, and in what quantity, is obtained when this item is fed into the Extractinator. By default the parameters will be set to the output of feeding Silt/Slush into the Extractinator.
+		/// Allows you to modify what item, and in what quantity, is obtained when any item belonging to the extractinator type corresponding to this item is fed into the Extractinator.
+		/// <br/> This method is only called if <c>ItemID.Sets.ExtractinatorMode[Item.type] = Item.type;</c> in used in SetStaticDefaults. Other items belonging to the same extractinator group should use <c>ItemID.Sets.ExtractinatorMode[Item.type] = ModContent.ItemType&lt;IconicItemForThisExtractinatorType&gt;();</c> to indicate that they share the same extractinator output pool and to avoid code duplication.
+		/// <br/> By default the parameters will be set to the output of feeding Silt/Slush into the Extractinator.
+		/// <br/> Use <paramref name="extractinatorBlockType"/> to provide different behavior for <see cref="TileID.ChlorophyteExtractinator"/> if desired.
+		/// <br/> If the Chlorophyte Extractinator item swapping behavior is desired, see the example in ExampleAdvancedFlail.cs.
+		/// <br/> 
+		/// <br/> This method is not instanced.
 		/// </summary>
+		/// <param name="extractinatorBlockType">Which Extractinator tile is being used, <see cref="TileID.Extractinator"/> or <see cref="TileID.ChlorophyteExtractinator"/>.</param>
 		/// <param name="resultType">Type of the result.</param>
 		/// <param name="resultStack">The result stack.</param>
-		public virtual void ExtractinatorUse(ref int resultType, ref int resultStack) {
+		public virtual void ExtractinatorUse(int extractinatorBlockType, ref int resultType, ref int resultStack) {
 		}
 
 		/// <summary>
@@ -1111,12 +1114,6 @@ namespace Terraria.ModLoader
 		/// <param name="catchLocation">The catch location.</param>
 		public virtual void AnglerQuestChat(ref string description, ref string catchLocation) {
 		}
-
-		/// <summary>
-		/// The type of NPC that drops this boss bag. Used to determine how many coins this boss bag contains. Defaults to 0, which means this isn't a boss bag.
-		/// </summary>
-		[Obsolete("Use ModifyItemLoot to set drops. Set ItemID.Sets.BossBag[Type] in SetStaticDefaults", true)]
-		public virtual int BossBagNPC => 0;
 
 		/// <summary>
 		/// Allows you to save custom data for this item.
