@@ -1071,7 +1071,7 @@
  						ai[1] = 900 + Main.rand.Next(10800);
 +
 +						// TML: #ModdedChairsForNPCs
-+						SitDown(b, out int targetDirection, out var bottom);
++						SitDown(point, out int targetDirection, out var bottom);
 +						/*
  						direction = ((tile2.frameX != 0) ? 1 : (-1));
  						base.Bottom = new Vector2(point.X * 16 + 8 + 2 * direction, point.Y * 16 + 16);
@@ -1518,7 +1518,7 @@
 +			spawnInfo.SpawnTileX = num;
 +			spawnInfo.SpawnTileY = num2;
 +			spawnInfo.SpawnTileType = num3;
-+			spawnInfo.Player = Main.player[num7];
++			spawnInfo.Player = Main.player[k];
 +			spawnInfo.Sky = flag3;
 +			spawnInfo.Lihzahrd = flag4;
 +			spawnInfo.PlayerSafe = flag5;

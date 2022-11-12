@@ -1,5 +1,10 @@
 --- src/TerrariaNetCore/Terraria/Graphics/Effects/SkyManager.cs
 +++ src/tModLoader/Terraria/Graphics/Effects/SkyManager.cs
+@@ -1,3 +_,4 @@
++using System;
+ using System.Collections.Generic;
+ using Microsoft.Xna.Framework;
+ using Microsoft.Xna.Framework.Graphics;
 @@ -9,6 +_,7 @@
  	public static SkyManager Instance = new SkyManager();
  	private float _lastDepth;

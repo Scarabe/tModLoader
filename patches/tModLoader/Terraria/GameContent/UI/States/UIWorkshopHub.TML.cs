@@ -115,7 +115,7 @@ namespace Terraria.GameContent.UI.States
 
 		private UIElement MakeFancyButtonMod(string path, string textKey)
 		{
-			return MakeFancyButtonInner(ModLoader.ModLoader.ManifestAssets.Request<Texture2D>(path), textKey);
+			return MakeFancyButton_Inner(ModLoader.ModLoader.ManifestAssets.Request<Texture2D>(path), textKey);
 		}
 	}
 }

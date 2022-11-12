@@ -1,6 +1,6 @@
 --- src/TerrariaNetCore/Terraria/ID/MessageID.cs
 +++ src/tModLoader/Terraria/ID/MessageID.cs
-@@ -1,85 +_,448 @@
+@@ -1,85 +_,466 @@
  using Terraria.Utilities;
 +using System;
 +using System.Collections.Generic;
@@ -302,13 +302,17 @@
 +
 +	// Player's current and maximum mana
 +	// Sent on change, and the major client and server sync
-+	public const byte PlayerMana = Unknown42;
++	public const byte PlayerMana = 42;
++	/*
  	public const byte Unknown42 = 42;
++	*/
 +
 +	// Restores mana
 +	// Forwarded to other clients
-+	public const byte ManaEffect = Unknown43;
++	public const byte ManaEffect = 43;
++	/*
  	public const byte Unknown43 = 43;
++	*/
 +
 +	// Player.KillMe
 +	// Forwarded to other clients
@@ -321,19 +325,24 @@
 +
 +	// Forwarded to clients
 +	// Forwarding includes the chat message "{player} has joined the {team} party"
-+	public const byte PlayerTeam = Unknown45;
++	public const byte PlayerTeam = 45;
++	/*
  	public const byte Unknown45 = 45;
++	*/
 +
 +	// If the server finds a sign at the location, it replies with ReadSign
-+	public const byte RequestReadSign = Unknown46;
++	public const byte RequestReadSign = 46;
++	/*
  	public const byte Unknown46 = 46;
-+	
++	*/
 +
 +	// SignIndex, x, y, text, player
 +	// If the text changes on the server, the packet is forwarded to other clients
 +	// Opens the sign gui and plays the sound on the client
-+	public const byte ReadSign = Unknown47;
++	public const byte ReadSign = 47;
++	/*
  	public const byte Unknown47 = 47;
++	*/
 +
 +	// X, y, liquid, liquidType
 +	// If NetPlayer.spamCheck will kick the player if the placement position is more than 10 tiles from the player
@@ -386,9 +395,11 @@
  	public const byte UniqueTownNPCInfoSyncRequest = 56;
 +
 +	// Hallowed/corrupted/crimson tile counts (out of 100)
-+	public const byte TileCounts = Unknown57;
++	public const byte TileCounts = 57;
++	/*
  	public const byte Unknown57 = 57;
-+	
++	*/
++
 +	// Main.harpNote = pitch
 +	// Plays harp or bell sound based on held item at player position
 +	// Forwarded to other clients
@@ -401,8 +412,10 @@
 +	// NpcID, homeX, homeY, changeType
 +	// ChangeType WorldGen.{ kickOut = 0, moveRoom = 1 }
 +	// Sent by client on WorldGen.kickOut/moveRoom, propogated by server in UpdateNPC
-+	public const byte NPCHome = Unknown60;
++	public const byte NPCHome = 60;
++	/*
  	public const byte Unknown60 = 60;
++	*/
 +
 +	// Player, npcID
 +	// Only sent by client, accepted by server
@@ -417,19 +430,24 @@
 +
 +	// Player, dodgeType { NinjaDodge = 1, ShadowDodge = 2 }
 +	// Forwarded to other clients
-+	public const byte Dodge = Unknown62;
++	public const byte Dodge = 62;
++	/*
  	public const byte Unknown62 = 62;
++	*/
 +
 +	// WorldGen.paintTile(x, y, color)
 +	// Forwarded to other clients
-+	public const byte PaintTile = Unknown63;
++	public const byte PaintTile = 63;
++	/*
  	public const byte Unknown63 = 63;
-+	
++	*/
 +
 +	// WorldGen.paintWall(x, y, color)
 +	// Forwarded to other clients
-+	public const byte PaintWall = Unknown64;
++	public const byte PaintWall = 64;
++	/*
  	public const byte Unknown64 = 64;
++	*/
 +
 +	// TeleportType, index, position
 +	// First 2 bits of teleportType { Player = 0, NPC = 1, PlayerToPlayer = 2 }

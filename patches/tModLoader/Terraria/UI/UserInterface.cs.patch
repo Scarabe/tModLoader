@@ -87,37 +87,37 @@
 +		UpdateButtonState(
 +			time, uIElement, flag2,
 +			ref mouseRightData,
-+			uIElement.RightClick,
-+			uIElement.RightDoubleClick,
-+			uIElement.RightMouseDown,
-+			uIElement.RightMouseUp
++			e => e.Target.RightClick(e),
++			e => e.Target.RightDoubleClick(e),
++			e => e.Target.RightMouseDown(e),
++			e => e.Target.RightMouseUp(e)
 +		);
 +		// Middle
 +		UpdateButtonState(
 +			time, uIElement, flag2,
 +			ref mouseMiddleData,
-+			uIElement.MiddleClick,
-+			uIElement.MiddleDoubleClick,
-+			uIElement.MiddleMouseDown,
-+			uIElement.MiddleMouseUp
++			e => e.Target.MiddleClick(e),
++			e => e.Target.MiddleDoubleClick(e),
++			e => e.Target.MiddleMouseDown(e),
++			e => e.Target.MiddleMouseUp(e)
 +		);
 +		// XButton1
 +		UpdateButtonState(
 +			time, uIElement, flag2,
 +			ref mouseXButton1Data,
-+			uIElement.XButton1Click,
-+			uIElement.XButton1DoubleClick,
-+			uIElement.XButton1MouseDown,
-+			uIElement.XButton1MouseUp
++			e => e.Target.XButton1Click(e),
++			e => e.Target.XButton1DoubleClick(e),
++			e => e.Target.XButton1MouseDown(e),
++			e => e.Target.XButton1MouseUp(e)
 +		);
 +		// XButton2
 +		UpdateButtonState(
 +			time, uIElement, flag2,
 +			ref mouseXButton2Data,
-+			uIElement.XButton2Click,
-+			uIElement.XButton2DoubleClick,
-+			uIElement.XButton2MouseDown,
-+			uIElement.XButton2MouseUp
++			e => e.Target.XButton2Click(e),
++			e => e.Target.XButton2DoubleClick(e),
++			e => e.Target.XButton2MouseDown(e),
++			e => e.Target.XButton2MouseUp(e)
 +		);
 +
  		if (PlayerInput.ScrollWheelDeltaForUI != 0) {

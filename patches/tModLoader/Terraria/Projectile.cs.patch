@@ -962,12 +962,14 @@
  		if (aiStyle == 1) {
  			AI_001();
  		}
-@@ -24134,7 +_,7 @@
+@@ -24134,7 +_,10 @@
  					int num799 = (int)base.Center.Y / 16;
  					for (int num800 = num798 - num797; num800 <= num798 + num797; num800++) {
  						for (int num801 = num799 - num797; num801 <= num799 + num797; num801++) {
--							if (Main.rand.Next(4) == 0 && new Vector2(num798 - num800, num799 - num801).Length() < (float)num797 && num800 > 0 && num800 < Main.maxTilesX - 1 && num801 > 0 && num801 < Main.maxTilesY - 1 && Main.tile[num800, num801] != null && Main.tile[num800, num801].active() && Main.IsTileSpelunkable(Main.tile[num800, num801])) {
-+							if (Main.rand.Next(4) == 0 && new Vector2(num798 - num800, num799 - num801).Length() < (float)num794 && num800 > 0 && num800 < Main.maxTilesX - 1 && num801 > 0 && num801 < Main.maxTilesY - 1 && Main.tile[num800, num801] != null && Main.tile[num800, num801].active() && Main.IsTileSpelunkable(num800, num801)) {
++							/*
+ 							if (Main.rand.Next(4) == 0 && new Vector2(num798 - num800, num799 - num801).Length() < (float)num797 && num800 > 0 && num800 < Main.maxTilesX - 1 && num801 > 0 && num801 < Main.maxTilesY - 1 && Main.tile[num800, num801] != null && Main.tile[num800, num801].active() && Main.IsTileSpelunkable(Main.tile[num800, num801])) {
++							*/
++							if (Main.rand.Next(4) == 0 && new Vector2(num798 - num800, num799 - num801).Length() < (float)num797 && num800 > 0 && num800 < Main.maxTilesX - 1 && num801 > 0 && num801 < Main.maxTilesY - 1 && Main.tile[num800, num801] != null && Main.tile[num800, num801].active() && Main.IsTileSpelunkable(num800, num801)) {
  								int num802 = Dust.NewDust(new Vector2(num800 * 16, num801 * 16), 16, 16, 204, 0f, 0f, 150, default(Color), 0.3f);
  								Main.dust[num802].fadeIn = 0.75f;
  								Dust dust2 = Main.dust[num802];
@@ -1038,7 +1040,7 @@
  		float meleeSpeed = player.meleeSpeed;
  		float num15 = 1f / meleeSpeed;
 +		*/
-+		float num15 = 1f / player.inverseMeleeSpeed;
++							float num15 = 1f / player.inverseMeleeSpeed;
 +
  		num2 *= num15;
  		num8 *= num15;

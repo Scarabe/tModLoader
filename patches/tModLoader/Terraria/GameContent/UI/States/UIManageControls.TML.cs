@@ -30,7 +30,7 @@ public partial class UIManageControls : UIState
 		_BindingsHalfSingleLine.AddRange(tmlBindings);
 	}
 
-	private void OnAssembleBindPanels(ReadOnlySpan<List<string>> bindingsWithMouseButtons)
+	private void OnAssembleBindPanels()
 	{
 		// Handle mod keybinds
 

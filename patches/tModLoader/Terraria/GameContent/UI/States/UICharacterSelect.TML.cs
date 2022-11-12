@@ -12,6 +12,7 @@ using Terraria.Utilities;
 
 namespace Terraria.GameContent.UI.States;
 
+//TODO: UIWorldSelect.TML.cs is almost the exact same thing. Please make these files share code.
 public partial class UICharacterSelect : UIState
 {
 	// Added by TML.
@@ -47,7 +48,7 @@ public partial class UICharacterSelect : UIState
 
 		// TODO: Do we need to do extra work for .plr files that have been renamed? Is that valid?
 		// TODO: We could probably support cloud players as well, if we tried.
-		// Vanilla and 1.3 paths are defaults, 1.4 tmod paths are relative to current savepath.
+		// Vanilla and 1.3 paths are defaults, 1.4 TML paths are relative to current savepath.
 		var otherPaths = new (string path, string message, int stabilityLevel)[] {
 			(path: Path.Combine(ReLogic.OS.Platform.Get<ReLogic.OS.IPathService>().GetStoragePath("Terraria"), "Players"), "Click to copy \"{0}\" over from Terraria", 0),
 			(path: Path.Combine(ReLogic.OS.Platform.Get<ReLogic.OS.IPathService>().GetStoragePath("Terraria"), "ModLoader", "Players"), "Click to copy \"{0}\" over from 1.3 tModLoader", 0),
@@ -193,9 +194,9 @@ public partial class UICharacterSelect : UIState
 		Main.menuMode = 1;
 	}
 
-	// Auto
+	// Automatic
 
-	private void AddAutoMigrationElements()
+	private void AddAutomaticPlayerMigrationButtons()
 	{
 		string vanillaPlayersPath = Path.Combine(ReLogic.OS.Platform.Get<ReLogic.OS.IPathService>().GetStoragePath("Terraria"), "Players");
 
@@ -222,7 +223,7 @@ public partial class UICharacterSelect : UIState
 			migrateText.SetText(Language.GetText("tModLoader.MigratingWorldsText"));
 
 			Task.Factory.StartNew(
-				() => ExecuteAutoMigration(vanillaPlayersPath),
+				() => ExecuteAutomaticPlayerMigration(vanillaPlayersPath),
 				TaskCreationOptions.PreferFairness
 			);
 		};
@@ -245,7 +246,7 @@ public partial class UICharacterSelect : UIState
 		_playerList.Add(noPlayersMessage);
 	}
 
-	private static void ExecuteAutoMigration(string vanillaPlayersPath)
+	private static void ExecuteAutomaticPlayerMigration(string vanillaPlayersPath)
 	{
 		var vanillaPlayerFiles = Directory.GetFiles(vanillaPlayersPath, "*.*")
 			.Where(s => s.EndsWith(".plr") || s.EndsWith(".tplr") || s.EndsWith(".bak"));

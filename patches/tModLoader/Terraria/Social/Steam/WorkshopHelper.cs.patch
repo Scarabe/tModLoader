@@ -86,7 +86,7 @@
  						if (!(text == "World")) {
  							if (text == "ResourcePack")
  								ResourcePackPaths.Add(listOfSubscribedItemsPath);
-+							else if (a == "Mod")
++							else if (text == "Mod")
 +								ModPaths.Add(listOfSubscribedItemsPath);
  						}
  						else {

@@ -1,6 +1,7 @@
 --- src/TerrariaNetCore/Terraria/GameContent/TreePaintSystemData.cs
 +++ src/tModLoader/Terraria/GameContent/TreePaintSystemData.cs
-@@ -1,3 +_,5 @@
+@@ -1,3 +_,6 @@
++using System;
 +using Terraria.ModLoader;
 +
  namespace Terraria.GameContent;

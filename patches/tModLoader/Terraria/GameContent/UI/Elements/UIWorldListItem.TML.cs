@@ -42,7 +42,7 @@ public partial class UIWorldListItem : AWorldListItem
 	{
 		// Main.ActivePlayerFileData gets cleared during reload
 		string path = Main.ActivePlayerFileData.Path;
-		string isCloudSave = Main.ActivePlayerFileData.IsCloudSave;
+		bool isCloudSave = Main.ActivePlayerFileData.IsCloudSave;
 
 		return () => {
 			// Re-select the current player

@@ -622,23 +622,6 @@
  		if (!item.Prefix(-3))
  			return;
  
-@@ -14902,6 +_,7 @@
- 			if (genRand.Next(30) != 0 || Main.chest[num3].item[1].stack == 0)
- 				continue;
- 
-+			// Extra patch context.
- 			for (int num5 = 1; num5 < 40; num5++) {
- 				if (Main.chest[num3].item[num5].stack == 0) {
- 					Main.chest[num3].item[num5].SetDefaults(678);
-@@ -14909,6 +_,8 @@
- 				}
- 			}
- 		}
-+
-+		PlantLoader.GetTreeLeaf(t.type, ref passStyle);
- 	}
- 
- 	private static void FinishRemixWorld()
 @@ -15350,7 +_,7 @@
  		if (!InWorld(i, y))
  			return false;
@@ -700,6 +683,25 @@
  		for (int num = -1; num > -100; num--) {
  			Tile tile = Main.tile[x, y + num];
  			if (!tile.active() || !TileID.Sets.GetsCheckedForLeaves[tile.type])
+@@ -17648,14 +_,18 @@
+ 						case 17:
+ 							passStyle = num2 + 8;
+ 							break;
++							// Extra extra patch context.
+ 					}
+ 				}
+ 
+ 				passStyle += num;
+ 				treeHeight += 5;
++				// Extra patch context.
+ 				break;
+ 			}
+ 		}
++
++		PlantLoader.GetTreeLeaf(t.type, ref passStyle);
+ 	}
+ 
+ 	public static void TreeGrowFX(int x, int y, int height, int treeGore, bool hitTree = false)
 @@ -17745,14 +_,17 @@
  			case 662:
  				return true;
@@ -1488,7 +1490,7 @@
  					Main.tile[k, l] = new Tile();
  
 -				if (Main.tile[k, l].active() && (Main.tile[k, l].type == 139 || Main.tile[k, l].type == 35)) {
-+				if (Main.tile[k, l].active() && (Main.tile[k, l].type == 139 || Main.tile[k, l].type == 35 || TileLoader.IsModMusicBox(tile))) {
++				if (Main.tile[k, l].active() && (Main.tile[k, l].type == 139 || Main.tile[k, l].type == 35 || TileLoader.IsModMusicBox(Main.tile[k, l]))) {
  					if (Main.tile[k, l].frameX < 36)
  						Main.tile[k, l].frameX += 36;
  					else

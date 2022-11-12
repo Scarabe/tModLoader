@@ -316,7 +316,7 @@
 +				/*
  				int num199 = reader.ReadInt16();
 +				*/
-+				int num195 = ModNet.AllowVanillaClients ? reader.ReadInt16() : reader.ReadInt32();
++				int num199 = ModNet.AllowVanillaClients ? reader.ReadInt16() : reader.ReadInt32();
 +
  				float num200 = reader.ReadSingle();
  				int num201 = reader.ReadByte() - 1;
@@ -569,12 +569,15 @@
  					if (!NPC.AnyNPCs(num223))
  						NPC.SpawnOnPlayer(num222, num223);
  				}
-@@ -2720,7 +_,7 @@
+@@ -2720,7 +_,11 @@
  				if (Main.netMode == 1) {
  					int num89 = reader.ReadInt16();
  					int num90 = reader.ReadInt32();
--					if (num89 >= 0 && num89 < 290)
-+					if (num100 >= 0)
++
++					/*
+ 					if (num89 >= 0 && num89 < 290)
++					*/
++					if (num89 >= 0)
  						NPC.killCount[num89] = num90;
  				}
  				break;
